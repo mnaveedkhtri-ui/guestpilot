@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+  GuestPilot AI design tokens.
+  A single dark, premium ink-and-amber system. Amber stands for outreach
+  signal (a reply landing, an email going out); indigo is the calm,
+  structural "pilot" color used for primary actions and navigation state.
+*/
+:root {
+  --color-ink: #0b0d12;
+  --color-surface: #12151c;
+  --color-surface-2: #191d26;
+  --color-border: #262b36;
+
+  --color-text: #f1f3f6;
+  --color-text-muted: #8b93a3;
+
+  --color-primary: #4f5bd5;
+  --color-primary-hover: #6270e8;
+  --color-primary-foreground: #ffffff;
+
+  --color-accent: #f0a93b;
+  --color-accent-foreground: #1a1206;
+
+  --color-success: #34c77b;
+  --color-danger: #f0546b;
+  --color-warning: #f0a93b;
+
+  /*
+    System font stacks — deliberately not fetched from Google Fonts, so
+    the app builds and renders identically offline, in Docker, or behind
+    a restrictive egress proxy. Swap in next/font/google (Sora + Inter,
+    matched in spirit here) once the deploy target has open internet.
+  */
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--color-accent-foreground);
+  --color-success: var(--color-success);
+  --color-danger: var(--color-danger);
+  --color-warning: var(--color-warning);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
