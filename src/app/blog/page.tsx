@@ -7,27 +7,8 @@ export const metadata: Metadata = {
   description: "Learn the latest guest post strategies, link building tactics, and SEO tips to improve your search engine rankings.",
 };
 
-// Sample data (Aap ise future mein DB se replace kar sakte hain)
-const posts = [
-  {
-    slug: "guest-post-outreach-guide",
-    title: "The Ultimate Guest Post Outreach Guide for SEO Agencies",
-    excerpt: "Learn how to craft pitches that actually get replies and build high quality backlinks for your clients in 2024.",
-    date: "15 May, 2024",
-    author: "Naveed Khatri",
-    category: "SEO",
-    views: "1.2k"
-  },
-  {
-    slug: "domain-rating-explained",
-    title: "Domain Rating vs Domain Authority: Which Metric Matters More?",
-    excerpt: "A deep dive into Ahrefs DR and Moz DA. Understand the difference and learn which one you should track.",
-    date: "10 May, 2024",
-    author: "Naveed Khatri",
-    category: "TECHNOLOGY",
-    views: "850"
-  }
-];
+// Sample data remove kar diya hai. Aap future mein yahan DB se data la sakte hain.
+const posts: any[] = []; 
 
 export default function BlogPage() {
   return (
@@ -47,11 +28,12 @@ export default function BlogPage() {
           {/* Blog Posts List (Left Side) */}
           <div className="lg:col-span-2 space-y-10">
             {posts.length === 0 ? (
-              <div className="text-center py-20 border border-dashed border-gray-800 rounded-xl">
-                <p className="text-gray-500">No blog posts published yet. Check back soon!</p>
+              <div className="text-center py-20 border border-dashed border-gray-800 rounded-xl bg-gray-900/30">
+                <p className="text-gray-500 text-lg">No blog posts published yet.</p>
+                <p className="text-gray-600 text-sm mt-2">Check back soon for amazing SEO insights!</p>
               </div>
             ) : (
-              posts.map((post) => (
+              posts.map((post: any) => (
                 <article key={post.slug} className="group relative bg-gray-900/50 border border-gray-800 rounded-xl p-8 transition-all duration-500 hover:border-blue-500/50 hover:bg-gray-900 hover:-translate-y-1">
                   
                   {/* Meta Info Top */}
