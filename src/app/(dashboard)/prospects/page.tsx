@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { AddProspectForm } from "./add-prospect-form";
 import { StatusSelect } from "./status-select";
 import { DomainRatingCell } from "./domain-rating-cell";
-import { DeleteButton } from "./delete-button"; // Naya import
+import { DeleteButton } from "./delete-button";
 
 export default async function ProspectsPage() {
   const session = await auth();
@@ -85,8 +85,8 @@ export default async function ProspectsPage() {
                       <DeleteButton id={row.id} />
                     </td>
                     <td className="px-5 py-3 text-right">
-                      {/* Yahan prospectId ki jagah email pass karna hai */}
-                     <SendEmailButton email={row.contactEmail ?? ""} domain={row.domain} />
+                      {/* Yahan domain prop add karna zaroori tha */}
+                      <SendEmailButton email={row.contactEmail ?? ""} domain={row.domain} />
                     </td>
                   </tr>
                 ))}
