@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { CheckCircle2, Sparkles, ShieldCheck, Zap } from "lucide-react";
+import { CheckCircle2, Sparkles, ShieldCheck, Zap, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Upgrade to Pro | Guest Pilot",
