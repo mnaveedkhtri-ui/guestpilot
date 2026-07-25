@@ -1,8 +1,8 @@
 import { desc, eq } from "drizzle-orm";
+import { prospects, campaigns } from "@/db/schema";
 import { SendEmailButton } from "./send-email-button";
 import { auth } from "@/lib/auth";
 import { db } from "@/db";
-import { prospects } from "@/db/schema";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { AddProspectForm } from "./add-prospect-form";
 import { StatusSelect } from "./status-select";
@@ -13,12 +13,24 @@ export default async function ProspectsPage() {
   const session = await auth();
   const workspaceId = session?.workspace?.id;
 
+  // Prospects fetch karein
   const rows = workspaceId
     ? await db
         .select()
         .from(prospects)
         .where(eq(prospects.workspaceId, workspaceId))
         .orderBy(desc(prospects.createdAt))
+    : [];
+
+  // Campaigns fetch karein taake dropdown mein dikh sakein
+  const campaignsData = workspaceId
+    ? await db
+        .select({
+          id: campaigns.id,
+          name: campaigns.name
+        })
+        .from(campaigns)
+        .where(eq(campaigns.workspaceId, workspaceId))
     : [];
 
   return (
@@ -36,7 +48,8 @@ export default async function ProspectsPage() {
           <CardDescription>Add a website domain to start tracking outreach.</CardDescription>
         </CardHeader>
         <CardContent>
-          <AddProspectForm />
+          {/* Campaigns pass kar rahe hain */}
+          <AddProspectForm campaigns={campaignsData} />
         </CardContent>
       </Card>
 
@@ -85,7 +98,6 @@ export default async function ProspectsPage() {
                       <DeleteButton id={row.id} />
                     </td>
                     <td className="px-5 py-3 text-right">
-                      {/* Yahan domain prop add karna zaroori tha */}
                       <SendEmailButton email={row.contactEmail ?? ""} domain={row.domain} />
                     </td>
                   </tr>
