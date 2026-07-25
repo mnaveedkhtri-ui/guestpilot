@@ -1,4 +1,5 @@
 import { desc, eq } from "drizzle-orm";
+import { SendEmailButton } from "./send-email-button";
 import { auth } from "@/lib/auth";
 import { db } from "@/db";
 import { prospects } from "@/db/schema";
@@ -58,6 +59,7 @@ export default async function ProspectsPage() {
                   <th className="font-medium px-5 py-3">Status</th>
                   <th className="font-medium px-5 py-3">Added</th>
                   <th className="font-medium px-5 py-3 text-right">Actions</th> {/* Naya column */}
+                  <th className="font-medium px-5 py-3 text-right">Email</th>
                 </tr>
               </thead>
               <tbody>
@@ -82,6 +84,9 @@ export default async function ProspectsPage() {
                     <td className="px-5 py-3 text-right">
                       <DeleteButton id={row.id} /> {/* Yahan add karna tha */}
                     </td>
+                    <td className="px-5 py-3 text-right">
+                      <SendEmailButton prospectId={row.id} />
+                </td>
                   </tr>
                 ))}
               </tbody>
