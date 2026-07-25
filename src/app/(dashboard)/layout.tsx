@@ -10,16 +10,20 @@ export default async function DashboardLayout({
 }) {
   const session = await auth();
 
-  // Middleware already guards these routes, but a Server Component layout
-  // re-checks so this shell never renders without a valid session — e.g.
-  // if middleware matchers are ever edited without updating this file too.
   if (!session?.user) {
     redirect("/login");
   }
 
+  // Credits ko session se nikalen (default 10 rakhen)
+  const credits = (session as any).credits ?? 10;
+
   return (
     <div className="flex min-h-screen bg-ink">
-      <Sidebar workspaceName={session.workspace?.name ?? "Your workspace"} />
+      {/* Credits prop ko Sidebar mein pass karein */}
+      <Sidebar 
+        workspaceName={session.workspace?.name ?? "Your workspace"} 
+        credits={credits} 
+      />
       <div className="flex-1 flex flex-col min-w-0">
         <Topbar
           userName={session.user.name ?? "Account"}
