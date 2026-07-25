@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google"; // Google Provider add kiya
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { memberships, users } from "@/db/schema";
 import { loginSchema } from "@/lib/validations";
-import { verifyPassword } from "@/lib/password";
+import { verifyPassword } from "@/lib/password"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
@@ -12,6 +13,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/login",
   },
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
     Credentials({
       name: "Credentials",
       credentials: {
@@ -43,14 +48,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user?.id) {
-        token.userId = user.id;
+        // Agar Google se login kiya hai to user.id Google ki ID hoti hai.
+        // Hum database mein email se check karenge taake workspace mil sake.
+        const dbUser = user.email ? await db.query.users.findFirst({
+          where: eq(users.email, user.email),
+        }) : null;
 
-        // Attach the user's primary workspace so it's available on every
-        // request without an extra DB round trip from Server Components.
+        token.userId = dbUser?.id ?? user.id;
+
         const membership = await db.query.memberships.findFirst({
-          where: eq(memberships.userId, user.id),
+          where: eq(memberships.userId, token.userId as string),
           with: { workspace: true },
         });
+        
         if (membership) {
           token.workspaceId = membership.workspace.id;
           token.workspaceName = membership.workspace.name;
