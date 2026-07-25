@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Mail, MessageCircle, Send } from "lucide-react";
 
 export default function ContactPage() {
   const [status, setStatus] = useState("");
@@ -11,7 +12,6 @@ export default function ContactPage() {
     const formData = new FormData(e.currentTarget);
     
     try {
-      // Yahan aap future mein API ya Email service laga sakte hain
       await new Promise(resolve => setTimeout(resolve, 1000)); 
       setStatus("Message sent successfully! We will get back to you soon.");
       (e.target as HTMLFormElement).reset();
@@ -21,35 +21,92 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-16 px-6">
-      <h1 className="text-4xl font-bold text-white mb-6">Contact Us</h1>
-      <div className="grid md:grid-cols-2 gap-12">
-        <div className="text-gray-300 space-y-4">
-          <p>Have a question about Guest Pilot? Need help with your outreach campaigns? We are here to help.</p>
-          <div className="space-y-2">
-            <p><strong className="text-white">Email:</strong> naveedkhtri7@gmail.com</p>
-            <p><strong className="text-white">WhatsApp:</strong> +92 3323219981</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-black text-white">
+      <div className="mx-auto max-w-5xl px-6 py-16">
         
-        <form onSubmit={handleSubmit} className="space-y-4 bg-gray-900/50 p-6 rounded-xl border border-gray-800">
-          <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
-            <input type="text" name="name" required className="w-full bg-gray-800 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        {/* Header */}
+        <div className="mb-16 text-center border-b border-gray-800 pb-10">
+          <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent mb-4">
+            Contact Us
+          </h1>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Have a question about Guest Pilot? Need help with your outreach campaigns? We are here to help.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          
+          {/* Contact Info */}
+          <div className="space-y-6">
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 transition-all duration-500 hover:border-blue-500/50 flex items-start gap-4">
+              <div className="h-12 w-12 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+                <Mail size={24} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-1">Email Support</h3>
+                <p className="text-gray-400 text-sm mb-2">For general queries and support.</p>
+                <a href="mailto:naveedkhtri7@gmail.com" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                  naveedkhtri7@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 transition-all duration-500 hover:border-blue-500/50 flex items-start gap-4">
+              <div className="h-12 w-12 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+                <MessageCircle size={24} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-1">WhatsApp</h3>
+                <p className="text-gray-400 text-sm mb-2">For quick questions and fast responses.</p>
+                <a href="https://wa.me/92323219981" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                  +92 3323219981
+                </a>
+              </div>
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
-            <input type="email" name="email" required className="w-full bg-gray-800 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Message</label>
-            <textarea name="message" rows={4} required className="w-full bg-gray-800 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-          </div>
-          <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-colors">
-            Send Message
-          </button>
-          {status && <p className="text-center text-sm text-gray-400">{status}</p>}
-        </form>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5 bg-gray-900/50 border border-gray-800 rounded-xl p-8">
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Your Name</label>
+              <input 
+                type="text" 
+                name="name" 
+                required 
+                className="w-full bg-black/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                placeholder="John Doe"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+              <input 
+                type="email" 
+                name="email" 
+                required 
+                className="w-full bg-black/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                placeholder="john@example.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+              <textarea 
+                name="message" 
+                rows={4} 
+                required 
+                className="w-full bg-black/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none" 
+                placeholder="How can we help you?"
+              ></textarea>
+            </div>
+            <button 
+              type="submit" 
+              className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
+            >
+              Send Message <Send size={16} />
+            </button>
+            {status && <p className="text-center text-sm text-gray-400 pt-2">{status}</p>}
+          </form>
+          
+        </div>
       </div>
     </div>
   );
