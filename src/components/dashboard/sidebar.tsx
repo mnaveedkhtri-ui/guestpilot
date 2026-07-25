@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
 import {
   LayoutDashboard,
   Globe2,
@@ -21,10 +20,9 @@ const NAV_ITEMS = [
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
-export function Sidebar({ workspaceName }: { workspaceName: string }) {
+// Yahan credits prop receive karenge
+export function Sidebar({ workspaceName, credits }: { workspaceName: string; credits: number }) {
   const pathname = usePathname();
-  const { data: session } = useSession();
-  const credits = (session as any)?.credits ?? 10;
 
   return (
     <aside className="hidden md:flex w-60 shrink-0 flex-col border-r border-border bg-surface">
