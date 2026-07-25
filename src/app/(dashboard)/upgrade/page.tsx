@@ -100,7 +100,7 @@ export default function UpgradePage() {
           
           <div className="relative z-10">
             <h2 className="text-2xl font-bold text-text mb-2">Other Payment Methods</h2>
-            <p className="text-text-muted mb-8">We support secure international payments and local bank transfers for your convenience.</p>
+            <p className="text-text-muted mb-8">We support secure international payments and local mobile transfers for your convenience.</p>
             
             <div className="grid md:grid-cols-2 gap-8">
               
@@ -129,10 +129,8 @@ export default function UpgradePage() {
                   <h3 className="text-lg font-semibold text-text">Local Transfer (Pakistan)</h3>
                 </div>
                 <div className="text-sm text-text-muted space-y-1.5 mb-4 font-mono">
-                  <p>Bank: <span className="text-text">Meezan Bank</span></p>
-                  <p>Title: <span className="text-text">Naveed Khatri</span></p>
-                  <p>Acct: <span className="text-text">0123456789012</span></p>
-                  <p>Easypaisa: <span className="text-text">0332-3219981</span></p>
+                  <p>Name: <span className="text-text">Erum Junaid</span></p>
+                  <p>JazzCash: <span className="text-text">03041394645</span></p>
                 </div>
                 <a 
                   href="https://wa.me/92323219981" 
