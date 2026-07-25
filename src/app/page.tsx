@@ -346,7 +346,8 @@ export default async function LandingPage() {
         </section>
       </main>
 
-      <LandingFooter />
+      {/* Yahan LandingFooter ki jagah Footer likha gaya hai */}
+      <Footer />
     </div>
   );
 }
