@@ -12,6 +12,10 @@ import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
+  <Link href="/finder" className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md text-text-muted hover:text-text hover:bg-surface transition-colors">
+  <Search className="h-4 w-4" />
+  Find Prospects
+</Link>
   { href: "/prospects", label: "Prospects", icon: Globe2 },
   { href: "/campaigns", label: "Campaigns", icon: Megaphone },
   { href: "/settings", label: "Settings", icon: Settings },
