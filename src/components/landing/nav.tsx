@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const LINKS = [
+// Landing page ke hash links
+const HASH_LINKS = [
   { href: "#features", label: "Features" },
   { href: "#how-it-works", label: "How it works" },
   { href: "#faq", label: "FAQ" },
@@ -21,8 +22,18 @@ export function LandingNav() {
           GuestPilot <span className="text-accent">AI</span>
         </Link>
 
+        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
-          {LINKS.map((link) => (
+          {/* Naye Page Links */}
+          <Link href="/blog" className="text-sm text-text-muted hover:text-text transition-colors">
+            Blog
+          </Link>
+          <Link href="/contact" className="text-sm text-text-muted hover:text-text transition-colors">
+            Contact
+          </Link>
+          
+          {/* Landing Page Hash Links */}
+          {HASH_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -56,9 +67,19 @@ export function LandingNav() {
         </button>
       </nav>
 
+      {/* Mobile Menu */}
       {open && (
         <div className="md:hidden border-t border-border bg-ink px-5 py-4 space-y-4">
-          {LINKS.map((link) => (
+          {/* Naye Page Links for Mobile */}
+          <Link href="/blog" className="block text-sm text-text-muted hover:text-text" onClick={() => setOpen(false)}>
+            Blog
+          </Link>
+          <Link href="/contact" className="block text-sm text-text-muted hover:text-text" onClick={() => setOpen(false)}>
+            Contact
+          </Link>
+
+          {/* Landing Page Hash Links for Mobile */}
+          {HASH_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -68,14 +89,15 @@ export function LandingNav() {
               {link.label}
             </a>
           ))}
+          
           <div className="flex flex-col gap-2 pt-2">
             <Link href="/login">
-              <Button variant="secondary" className="w-full">
+              <Button variant="secondary" className="w-full" onClick={() => setOpen(false)}>
                 Sign in
               </Button>
             </Link>
             <Link href="/register">
-              <Button variant="accent" className="w-full">
+              <Button variant="accent" className="w-full" onClick={() => setOpen(false)}>
                 Start free
               </Button>
             </Link>
