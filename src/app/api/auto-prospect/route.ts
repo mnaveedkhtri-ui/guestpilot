@@ -1,24 +1,35 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/db";
-import { prospects } from "@/db/schema";
+import { prospects, users } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
   const session = await auth();
-  if (!session?.workspace?.id) {
+  if (!session?.workspace?.id || !session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const userId = session.user.id;
   const workspaceId = session.workspace.id;
 
   try {
+    // 1. User ka current credit check karein (Auto Finder ke liye 5 credits chahiye)
+    const user = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+    });
+
+    if (!user || user.credits < 5) {
+      return NextResponse.json({ error: "You need at least 5 credits to use Auto-Prospect. Please upgrade to Pro." }, { status: 403 });
+    }
+
     const { niche } = await req.json();
 
     if (!process.env.GROQ_API_KEY) {
       return NextResponse.json({ error: "GROQ API Key missing." }, { status: 500 });
     }
 
-    // 1. AI se websites aur unke standard emails mangwate hain
+    // 2. AI se websites ki list mangwate hain
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -44,16 +55,14 @@ export async function POST(req: Request) {
     const content = data.choices[0].message.content;
     const parsed = JSON.parse(content);
     
-    // Array extract karein
     const websitesArray = parsed.websites || [];
 
     if (websitesArray.length === 0) {
       return NextResponse.json({ error: "No websites found." }, { status: 404 });
     }
 
-    // 2. Dhoondhi hui websites aur emails ko Database mein add karein
+    // 3. Dhoondhi hui websites aur emails ko Database mein add karein
     for (const site of websitesArray) {
-      // Agar AI email nahi de pata, toh default info@ laga dein
       const email = site.contactEmail || `info@${site.domain}`;
       
       await db.insert(prospects).values({
@@ -63,6 +72,11 @@ export async function POST(req: Request) {
         status: "new",
       });
     }
+
+    // 4. AI success hone par 5 Credits minus karein
+    await db.update(users).set({
+      credits: user.credits - 5
+    }).where(eq(users.id, userId));
 
     return NextResponse.json({ success: true, count: websitesArray.length });
 
