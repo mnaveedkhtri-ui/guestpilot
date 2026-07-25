@@ -21,9 +21,8 @@ import { HeroVisual } from "@/components/landing/hero-visual";
 import { Reveal } from "@/components/landing/reveal";
 
 export const metadata: Metadata = {
-  title: "GuestPilot AI: Guest Post Outreach Software for Agencies and Teams",
-  description:
-    "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline in one workspace. Built for SEO agencies, freelancers, and content teams.",
+  title: "GuestPilot AI: Guest Post Outreach Tool",
+  description: "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline.",
   keywords: [
     "guest post outreach software",
     "link building tool",
@@ -33,17 +32,24 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "GuestPilot AI: Guest Post Outreach Software",
-    description:
-      "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline in one workspace.",
+    title: "GuestPilot AI: Guest Post Outreach Tool",
+    description: "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline.",
     type: "website",
-    url: "/",
+    url: "https://guests-pilot.vercel.app",
+    images: [
+      {
+        url: "https://guests-pilot.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "GuestPilot AI",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GuestPilot AI: Guest Post Outreach Software",
-    description:
-      "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline in one workspace.",
+    title: "GuestPilot AI: Guest Post Outreach Tool",
+    description: "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline.",
+    images: ["https://guests-pilot.vercel.app/og-image.png"],
   },
 };
 
@@ -346,7 +352,6 @@ export default async function LandingPage() {
         </section>
       </main>
 
-      {/* Yahan LandingFooter ki jagah Footer likha gaya hai */}
       <Footer />
     </div>
   );
