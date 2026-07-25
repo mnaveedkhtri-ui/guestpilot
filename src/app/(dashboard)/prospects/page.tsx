@@ -86,7 +86,7 @@ export default async function ProspectsPage() {
                     </td>
                     <td className="px-5 py-3 text-right">
                       {/* Yahan prospectId ki jagah email pass karna hai */}
-                      <SendEmailButton email={row.contactEmail ?? ""} />
+                     <SendEmailButton email={row.contactEmail ?? ""} domain={row.domain} />
                     </td>
                   </tr>
                 ))}
