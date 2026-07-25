@@ -3,7 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
-import { memberships, users, workspaces } from "@/db/schema"; // workspaces import kiya
+import { memberships, users, workspaces } from "@/db/schema";
 import { loginSchema } from "@/lib/validations";
 import { verifyPassword } from "@/lib/password"
 
@@ -59,7 +59,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             name: user.name ?? "Google User",
             email: user.email,
             avatarUrl: user.image ?? null,
-            // Agar aapke schema mein passwordHash null nahi ho sakta, toh dummy value daal dein
             passwordHash: crypto.randomUUID() + crypto.randomUUID(), 
           }).returning();
 
@@ -77,11 +76,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             role: "owner",
           });
 
-          // dbUser ko update kar dein taake niche wala code chale
           dbUser = newUser; 
         }
 
         token.userId = dbUser?.id ?? user.id;
+        
+        // --- CREDITS TOKEN MEIN ADD KIYE ---
+        token.credits = dbUser?.credits ?? 10;
 
         const membership = await db.query.memberships.findFirst({
           where: eq(memberships.userId, token.userId as string),
@@ -101,6 +102,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (session.user) {
         session.user.id = token.userId as string;
       }
+      
+      // --- CREDITS SESSION MEIN PASS KIYE ---
+      (session as any).credits = token.credits as number;
+
       session.workspace = token.workspaceId
         ? {
             id: token.workspaceId as string,
