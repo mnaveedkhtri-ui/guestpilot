@@ -10,14 +10,15 @@ export async function POST(req: Request) {
   try {
     const { domain } = await req.json();
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    // Grok (xAI) API ko call karein
+    const response = await fetch("https://api.x.ai/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Authorization": `Bearer ${process.env.XAI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini", // Fast aur cheap model
+        model: "grok-beta", // Grok ka latest model
         messages: [
           {
             role: "system",
@@ -39,8 +40,9 @@ export async function POST(req: Request) {
       const parsed = JSON.parse(content);
       return NextResponse.json({ success: true, subject: parsed.subject, body: parsed.body });
     } else {
-      console.error("OpenAI Error:", data);
-      return NextResponse.json({ error: "AI failed to generate pitch." }, { status: 500 });
+      console.error("Grok API Error:", data);
+      // Exact error show karne ke liye
+      return NextResponse.json({ error: data.error?.message || "Grok API failed to generate pitch." }, { status: 500 });
     }
 
   } catch (error) {
