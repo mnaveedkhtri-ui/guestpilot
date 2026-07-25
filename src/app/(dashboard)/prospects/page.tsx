@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { AddProspectForm } from "./add-prospect-form";
 import { StatusSelect } from "./status-select";
 import { DomainRatingCell } from "./domain-rating-cell";
+import { DeleteButton } from "./delete-button"; // Naya import
 
 export default async function ProspectsPage() {
   const session = await auth();
@@ -56,6 +57,7 @@ export default async function ProspectsPage() {
                   <th className="font-medium px-5 py-3">Contact</th>
                   <th className="font-medium px-5 py-3">Status</th>
                   <th className="font-medium px-5 py-3">Added</th>
+                  <th className="font-medium px-5 py-3 text-right">Actions</th> {/* Naya column */}
                 </tr>
               </thead>
               <tbody>
@@ -76,6 +78,9 @@ export default async function ProspectsPage() {
                     </td>
                     <td className="px-5 py-3 text-text-muted">
                       {row.createdAt.toLocaleDateString()}
+                    </td>
+                    <td className="px-5 py-3 text-right">
+                      <DeleteButton id={row.id} /> {/* Yahan add karna tha */}
                     </td>
                   </tr>
                 ))}
