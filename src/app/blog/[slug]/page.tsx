@@ -51,24 +51,14 @@ export default async function BlogPostPage({ params }: Props) {
           </h1>
         </div>
 
-        {/* Article Content */}
+        {/* Article Content (Aap yahan apna content likh sakte hain) */}
         <article className="prose prose-invert max-w-none">
           <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
             <p>
-              This is the high quality content area for your blog post. When you write your actual article, you will replace this text. The design is optimized for readability, featuring a clean, dark interface that makes the text pop.
+              Yahan aapka blog post content aayega. Jab aap koi naya post banayenge, toh is file mein apna high-quality, SEO-optimized content daal sakte hain.
             </p>
             <p>
-              We focus on natural language without em dashes to keep the reading experience smooth. The layout is fully responsive, meaning it looks stunning on both mobile phones and large desktop monitors.
-            </p>
-            <h2 className="text-2xl font-bold text-white mt-8">Why Link Building Matters</h2>
-            <p>
-              Link building remains one of the most important ranking factors in SEO. By securing guest posts on high authority domains, you signal to search engines that your site is trustworthy and relevant.
-            </p>
-            <blockquote className="border-l-4 border-blue-500 pl-6 italic text-gray-400 my-8">
-              Good SEO is not about tricking Google. It is about partnering with Google to provide the best search results.
-            </blockquote>
-            <p>
-              Guest Pilot helps you manage this entire process. From finding the right prospects to tracking your published links, everything is organized in one beautiful dashboard.
+              Humne dark theme aur clean typography use ki hai taake aapke readers ko padhne mein maza aaye aur Google ko bhi ye content pasand aaye.
             </p>
           </div>
         </article>
