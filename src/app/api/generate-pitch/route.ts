@@ -10,12 +10,10 @@ export async function POST(req: Request) {
   try {
     const { domain } = await req.json();
 
-    // Pehle check karein ke Vercel par API Key set hai ya nahi
     if (!process.env.XAI_API_KEY) {
       return NextResponse.json({ error: "API Key missing in Vercel Environment Variables." }, { status: 500 });
     }
 
-    // Grok (xAI) API ko call karein
     const response = await fetch("https://api.x.ai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -23,7 +21,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "grok-beta", 
+        model: "grok-2-latest", // Naya model use kiya gaya
         messages: [
           {
             role: "system",
@@ -40,15 +38,12 @@ export async function POST(req: Request) {
 
     const data = await response.json();
 
-      // Agar Grok API fail ho jaye
     if (!response.ok) {
-      console.error("Grok API Raw Error:", data);
-      // Pura data string mein convert kar ke bhej do
-      const errorMessage = JSON.stringify(data);
-      return NextResponse.json({ error: `Grok API Response: ${errorMessage}` }, { status: response.status });
+      console.error("Grok API Error:", data);
+      const errorMessage = data?.error?.message || data?.message || "Unknown Grok API error.";
+      return NextResponse.json({ error: `Grok API Error: ${errorMessage}` }, { status: response.status });
     }
-    
-    // Agar sab sahi hai, toh response parse karein
+
     if (data.choices && data.choices.length > 0) {
       const content = data.choices[0].message.content;
       const parsed = JSON.parse(content);
