@@ -1,21 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Yeh import add kiya
+import { useRouter } from "next/navigation";
 import { Mail, Send, Sparkles, Loader2 } from "lucide-react";
 
-export function SendEmailButton({ email, domain }: { email: string, domain: string }) {
-  const router = useRouter(); // Yeh router add kiya
+// Yahan prospectId bhi add kiya hai
+export function SendEmailButton({ prospectId, email, domain }: { prospectId: string, email: string, domain: string }) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [subject, setSubject] = useState("Guest Post Proposal");
   const [content, setContent] = useState("Hi there, I would love to write a high quality guest post for your website. Let me know if you are open to this!");
   
-  const [sending, setSending] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [status, setStatus] = useState("");
   const [error, setError] = useState(false);
 
-  // AI se Pitch Generate karne ka function
   const handleGenerateAI = async () => {
     setGenerating(true);
     setStatus("");
@@ -34,7 +33,7 @@ export function SendEmailButton({ email, domain }: { email: string, domain: stri
         setSubject(data.subject);
         setContent(data.body);
         setStatus("AI generated a new pitch!");
-        router.refresh(); // <-- YEH LINE ADD KI HAI TAKE SIDEBAR UPDATE HO
+        router.refresh();
       } else {
         setStatus(data.error || "Failed to generate.");
         setError(true);
@@ -47,10 +46,23 @@ export function SendEmailButton({ email, domain }: { email: string, domain: stri
     }
   };
 
-  // Gmail khulne ka function
-  const handleSend = () => {
+  const handleSend = async () => {
+    // 1. Gmail khole
     const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
     window.open(mailtoLink, "_blank");
+    
+    // 2. Automatically Status "Contacted" kar dein database mein
+    try {
+      await fetch("/api/prospects/update-status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prospectId, status: "contacted" }),
+      });
+      router.refresh(); // Taake table turant update ho
+    } catch (err) {
+      console.error("Failed to update status");
+    }
+    
     setOpen(false);
   };
 
