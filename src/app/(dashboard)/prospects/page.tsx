@@ -58,7 +58,7 @@ export default async function ProspectsPage() {
                   <th className="font-medium px-5 py-3">Contact</th>
                   <th className="font-medium px-5 py-3">Status</th>
                   <th className="font-medium px-5 py-3">Added</th>
-                  <th className="font-medium px-5 py-3 text-right">Actions</th> {/* Naya column */}
+                  <th className="font-medium px-5 py-3 text-right">Actions</th>
                   <th className="font-medium px-5 py-3 text-right">Email</th>
                 </tr>
               </thead>
@@ -82,11 +82,12 @@ export default async function ProspectsPage() {
                       {row.createdAt.toLocaleDateString()}
                     </td>
                     <td className="px-5 py-3 text-right">
-                      <DeleteButton id={row.id} /> {/* Yahan add karna tha */}
+                      <DeleteButton id={row.id} />
                     </td>
                     <td className="px-5 py-3 text-right">
-                      <SendEmailButton prospectId={row.id} />
-                </td>
+                      {/* Yahan prospectId ki jagah email pass karna hai */}
+                      <SendEmailButton email={row.contactEmail ?? ""} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
