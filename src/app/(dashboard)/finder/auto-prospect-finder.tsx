@@ -33,7 +33,7 @@ export function AutoProspectFinder() {
       if (res.ok) {
         setStatus(`Success! AI added ${data.count} new prospects to your list.`);
         setNiche("");
-        router.refresh(); // Taake Prospects table update ho jaye
+        router.refresh();
       } else {
         setStatus(data.error || "Failed to find prospects.");
         setError(true);
