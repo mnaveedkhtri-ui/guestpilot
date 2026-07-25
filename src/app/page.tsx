@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { LandingNav } from "@/components/landing/nav";
-import { LandingFooter } from "@/components/landing/footer";
+import { Footer } from "@/components/landing/footer";
 import { HeroVisual } from "@/components/landing/hero-visual";
 import { Reveal } from "@/components/landing/reveal";
 
