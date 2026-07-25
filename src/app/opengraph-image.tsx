@@ -20,18 +20,17 @@ export default async function Image() {
           fontFamily: 'sans-serif',
         }}
       >
-        {/* SVG hata kar simple text aur styling use ki hai */}
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '30px' }}>
-          <div style={{ fontSize: 80, fontWeight: 800, color: 'white' }}>
-            GuestPilot <span style={{ color: '#3B82F6' }}>AI</span>
-          </div>
+        {/* Har div jisme 1 se zyada children hain, usme display flex hai */}
+        <div style={{ display: 'flex', marginBottom: '20px' }}>
+          <div style={{ fontSize: 80, fontWeight: 800, color: 'white' }}>GuestPilot&nbsp;</div>
+          <div style={{ fontSize: 80, fontWeight: 800, color: '#3B82F6' }}>AI</div>
         </div>
         
-        <div style={{ fontSize: 36, color: '#94A3B8' }}>
+        <div style={{ display: 'flex', fontSize: 36, color: '#94A3B8' }}>
           Automate your guest post outreach and link building.
         </div>
         
-        <div style={{ marginTop: '40px', padding: '15px 40px', background: '#3B82F6', borderRadius: '12px', fontSize: 28, fontWeight: 'bold', color: 'white' }}>
+        <div style={{ display: 'flex', marginTop: '40px', padding: '15px 40px', background: '#3B82F6', borderRadius: '12px', fontSize: 28, fontWeight: 'bold', color: 'white' }}>
           Start Scaling Your Backlinks Today
         </div>
       </div>
