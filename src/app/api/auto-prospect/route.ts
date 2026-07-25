@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "GROQ API Key missing." }, { status: 500 });
     }
 
-    // 1. AI se websites ki list mangwate hain
+    // 1. AI se websites aur unke standard emails mangwate hain
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -28,8 +28,11 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
         messages: [
-          { role: "system", content: "You are an SEO expert. Return a JSON array of 5 high-authority domains that accept guest posts in the given niche. Only return domains like 'example.com', without 'https://'." },
-          { role: "user", content: `Find 5 websites in the "${niche}" niche.` }
+          { 
+            role: "system", 
+            content: "You are an SEO expert. Return a JSON object with a key 'websites' containing an array of 5 objects. Each object must have a 'domain' (e.g., 'example.com') and a 'contactEmail' (e.g., 'info@example.com', 'editor@example.com', or 'contact@example.com'). Do not include 'https://'. Do not use em dashes." 
+          },
+          { role: "user", content: `Find 5 high authority websites in the "${niche}" niche that accept guest posts.` }
         ],
         response_format: { type: "json_object" },
       }),
@@ -41,24 +44,27 @@ export async function POST(req: Request) {
     const content = data.choices[0].message.content;
     const parsed = JSON.parse(content);
     
-    // AI se string format mein aayega, usko array mein convert karein
-    const domainsString = JSON.stringify(parsed).match(/\[(.*?)\]/)?.[0];
-    const domainsArray: string[] = domainsString ? JSON.parse(domainsString) : [];
+    // Array extract karein
+    const websitesArray = parsed.websites || [];
 
-    if (domainsArray.length === 0) {
+    if (websitesArray.length === 0) {
       return NextResponse.json({ error: "No websites found." }, { status: 404 });
     }
 
-    // 2. Dhoondhi hui websites ko Database mein add karein
-    for (const domain of domainsArray) {
+    // 2. Dhoondhi hui websites aur emails ko Database mein add karein
+    for (const site of websitesArray) {
+      // Agar AI email nahi de pata, toh default info@ laga dein
+      const email = site.contactEmail || `info@${site.domain}`;
+      
       await db.insert(prospects).values({
-        domain: domain,
+        domain: site.domain,
+        contactEmail: email,
         workspaceId: workspaceId,
         status: "new",
       });
     }
 
-    return NextResponse.json({ success: true, count: domainsArray.length });
+    return NextResponse.json({ success: true, count: websitesArray.length });
 
   } catch (error) {
     console.error("Auto prospect error:", error);
