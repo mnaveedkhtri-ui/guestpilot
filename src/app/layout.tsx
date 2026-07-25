@@ -8,9 +8,30 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "GuestPilot AI",
   description: "The guest post outreach platform for teams that scale link building.",
-  // --- Yahan Google Verification Tag add kiya hai ---
   verification: {
     google: "wYFUIXoVNRkPCSeAExJZhbNGbE9pcbuFswY8d8GCIdw",
+  },
+  // --- Yahan OG Image aur Twitter Card add kiya hai ---
+  openGraph: {
+    title: "GuestPilot AI",
+    description: "Automate your guest post outreach and link building.",
+    url: siteUrl,
+    siteName: "GuestPilot AI",
+    images: [
+      {
+        url: `${siteUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "GuestPilot AI",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GuestPilot AI",
+    description: "Automate your guest post outreach and link building.",
+    images: [`${siteUrl}/og-image.png`],
   },
 };
 
