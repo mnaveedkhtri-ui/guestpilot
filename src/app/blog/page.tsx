@@ -38,7 +38,7 @@ export default function BlogPage() {
             <p className="text-sm text-gray-500 mb-2">{post.date}</p>
             <p className="text-gray-400">{post.excerpt}</p>
             <Link href={`/blog/${post.slug}`} className="inline-block mt-3 text-blue-400 hover:text-blue-300 transition-colors">
-              Read more ->
+              Read more
             </Link>
           </div>
         ))}
