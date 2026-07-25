@@ -13,9 +13,8 @@ export async function DELETE(
 
   try {
     const { id } = await params;
-    const prospectId = parseInt(id);
-    
-    await db.delete(prospects).where(eq(prospects.id, prospectId));
+    // parseInt hata diya kyunke id string hai
+    await db.delete(prospects).where(eq(prospects.id, id));
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Failed to delete prospect:", error);
