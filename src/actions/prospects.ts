@@ -38,9 +38,9 @@ export async function createProspectAction(
   }
 
   const parsed = createProspectSchema.safeParse({
-    domain: formData.get("domain"),
-    contactEmail: formData.get("contactEmail"),
-    notes: formData.get("notes"),
+    domain: formData.get("domain") ?? "",
+    contactEmail: formData.get("contactEmail") ?? "",
+    notes: formData.get("notes") ?? "",
   });
 
   if (!parsed.success) {
