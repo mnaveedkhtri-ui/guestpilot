@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
+import { db } from "@/db";
+import { users } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Topbar } from "@/components/dashboard/topbar";
 
@@ -10,16 +13,18 @@ export default async function DashboardLayout({
 }) {
   const session = await auth();
 
-  if (!session?.user) {
+  if (!session?.user?.id) {
     redirect("/login");
   }
 
-  // Credits ko session se nikalen (default 10 rakhen)
-  const credits = (session as any).credits ?? 10;
+  // Direct Database se user ka current credit check karein
+  const dbUser = await db.query.users.findFirst({
+    where: eq(users.id, session.user.id),
+  });
+  const credits = dbUser?.credits ?? 0;
 
   return (
     <div className="flex min-h-screen bg-ink">
-      {/* Credits prop ko Sidebar mein pass karein */}
       <Sidebar 
         workspaceName={session.workspace?.name ?? "Your workspace"} 
         credits={credits} 
