@@ -10,6 +10,11 @@ export async function POST(req: Request) {
   try {
     const { domain } = await req.json();
 
+    // Pehle check karein ke Vercel par API Key set hai ya nahi
+    if (!process.env.XAI_API_KEY) {
+      return NextResponse.json({ error: "API Key missing in Vercel Environment Variables." }, { status: 500 });
+    }
+
     // Grok (xAI) API ko call karein
     const response = await fetch("https://api.x.ai/v1/chat/completions", {
       method: "POST",
@@ -18,7 +23,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "grok-beta", // Grok ka latest model
+        model: "grok-beta", 
         messages: [
           {
             role: "system",
@@ -35,18 +40,29 @@ export async function POST(req: Request) {
 
     const data = await response.json();
 
-    if (response.ok && data.choices && data.choices.length > 0) {
+    // Agar Grok API fail ho jaye
+    if (!response.ok) {
+      console.error("Grok API Error:", data);
+      // Exact error message extract karein
+      const errorMessage = data?.error?.message || data?.message || "Unknown Grok API error.";
+      return NextResponse.json({ error: `Grok API Error: ${errorMessage}` }, { status: response.status });
+    }
+
+    // Agar sab sahi hai, toh response parse karein
+    if (data.choices && data.choices.length > 0) {
       const content = data.choices[0].message.content;
       const parsed = JSON.parse(content);
-      return NextResponse.json({ success: true, subject: parsed.subject, body: parsed.body });
+      return NextResponse.json({ 
+        success: true, 
+        subject: parsed.subject, 
+        body: parsed.body 
+      });
     } else {
-      console.error("Grok API Error:", data);
-      // Exact error show karne ke liye
-      return NextResponse.json({ error: data.error?.message || "Grok API failed to generate pitch." }, { status: 500 });
+      return NextResponse.json({ error: "Grok returned an unexpected response format." }, { status: 500 });
     }
 
   } catch (error) {
-    console.error("Generate pitch error:", error);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    console.error("Server error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
