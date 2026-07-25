@@ -2,18 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
   LayoutDashboard,
   Globe2,
   Megaphone,
   Settings,
-  Search, // Search icon import kiya
+  Search,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/finder", label: "Find Prospects", icon: Search }, // Naya link sahi format mein
+  { href: "/finder", label: "Find Prospects", icon: Search },
   { href: "/prospects", label: "Prospects", icon: Globe2 },
   { href: "/campaigns", label: "Campaigns", icon: Megaphone },
   { href: "/settings", label: "Settings", icon: Settings },
@@ -21,6 +23,8 @@ const NAV_ITEMS = [
 
 export function Sidebar({ workspaceName }: { workspaceName: string }) {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const credits = (session as any)?.credits ?? 10;
 
   return (
     <aside className="hidden md:flex w-60 shrink-0 flex-col border-r border-border bg-surface">
@@ -54,6 +58,23 @@ export function Sidebar({ workspaceName }: { workspaceName: string }) {
           );
         })}
       </nav>
+
+      {/* Credits aur Upgrade Box */}
+      <div className="p-3 border-t border-border">
+        <div className="bg-surface-2 rounded-lg p-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Zap size={16} className="text-accent" />
+            <span className="text-sm font-semibold text-text">Credits</span>
+          </div>
+          <p className="text-2xl font-bold text-text mb-3">{credits}</p>
+          <Link 
+            href="/upgrade" 
+            className="block w-full bg-primary hover:bg-primary-hover text-white text-sm font-medium py-2 rounded-md transition-colors"
+          >
+            Upgrade to Pro
+          </Link>
+        </div>
+      </div>
     </aside>
   );
 }
