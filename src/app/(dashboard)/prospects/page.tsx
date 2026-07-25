@@ -98,7 +98,8 @@ export default async function ProspectsPage() {
                       <DeleteButton id={row.id} />
                     </td>
                     <td className="px-5 py-3 text-right">
-                      <SendEmailButton email={row.contactEmail ?? ""} domain={row.domain} />
+                      {/* Yahan prospectId add kar diya hai */}
+                      <SendEmailButton prospectId={row.id} email={row.contactEmail ?? ""} domain={row.domain} />
                     </td>
                   </tr>
                 ))}
