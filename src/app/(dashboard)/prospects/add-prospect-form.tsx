@@ -30,15 +30,15 @@ export function AddProspectForm({ campaigns }: { campaigns: { id: string; name: 
       </div>
       <div>
         <Label htmlFor="campaignId">Campaign</Label>
-        {/* Yahan Dropdown add hua hai */}
+        {/* Dark theme ke hisaab se styles add kiye gaye hain */}
         <select 
           id="campaignId" 
           name="campaignId"
-          className="w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-text"
+          className="w-full h-9 rounded-md border border-gray-700 bg-gray-900 px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 text-white"
         >
-          <option value="">No campaign</option>
+          <option value="" className="bg-gray-900 text-white">No campaign</option>
           {campaigns.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
+            <option key={c.id} value={c.id} className="bg-gray-900 text-white">{c.name}</option>
           ))}
         </select>
       </div>
