@@ -21,7 +21,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "grok-2-latest", // Naya model use kiya gaya
+        model: "grok-2-latest",
         messages: [
           {
             role: "system",
@@ -32,26 +32,43 @@ export async function POST(req: Request) {
             content: `Write a guest post pitch email to the team at ${domain}. Suggest a topic relevant to their niche.`
           }
         ],
-        response_format: { type: "json_object" },
+        // response_format hata diya kyunke Grok isko support nahi kar raha tha
       }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Grok API Error:", data);
-      const errorMessage = data?.error?.message || data?.message || "Unknown Grok API error.";
-      return NextResponse.json({ error: `Grok API Error: ${errorMessage}` }, { status: response.status });
+      console.error("Grok API Raw Error:", data);
+      // Pura data string mein convert kar ke bhej do
+      const errorMessage = JSON.stringify(data);
+      return NextResponse.json({ error: `Grok API Response: ${errorMessage}` }, { status: response.status });
     }
 
     if (data.choices && data.choices.length > 0) {
       const content = data.choices[0].message.content;
-      const parsed = JSON.parse(content);
-      return NextResponse.json({ 
-        success: true, 
-        subject: parsed.subject, 
-        body: parsed.body 
-      });
+      
+      // Grok kabhi kabhi markdown code block mein JSON bhejta hai, usko clean karein
+      let cleanContent = content;
+      if (cleanContent.startsWith("```json")) {
+        cleanContent = cleanContent.replace(/```json/g, "").replace(/```/g, "").trim();
+      }
+
+      try {
+        const parsed = JSON.parse(cleanContent);
+        return NextResponse.json({ 
+          success: true, 
+          subject: parsed.subject, 
+          body: parsed.body 
+        });
+      } catch (parseError) {
+        // Agar JSON parse na ho, toh simple text return kar dein
+        return NextResponse.json({ 
+          success: true, 
+          subject: "Guest Post Proposal", 
+          body: cleanContent 
+        });
+      }
     } else {
       return NextResponse.json({ error: "Grok returned an unexpected response format." }, { status: 500 });
     }
