@@ -1,25 +1,21 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://guests-pilot.vercel.app";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "GuestPilot AI",
-  description: "The guest post outreach platform for teams that scale link building.",
+  metadataBase: new URL("https://guests-pilot.vercel.app"),
+  title: "GuestPilot AI: Outreach Tool",
+  description: "Automate guest post outreach and link building.",
   verification: {
     google: "wYFUIXoVNRkPCSeAExJZhbNGbE9pcbuFswY8d8GCIdw",
   },
-  // --- Yahan OG Image aur Twitter Card add kiya hai ---
   openGraph: {
-    title: "GuestPilot AI",
-    description: "Automate your guest post outreach and link building.",
-    url: siteUrl,
+    title: "GuestPilot AI: Outreach Tool",
+    description: "Automate guest post outreach and link building.",
+    url: "https://guests-pilot.vercel.app",
     siteName: "GuestPilot AI",
     images: [
       {
-        url: `${siteUrl}/og-image.png`,
+        url: "https://guests-pilot.vercel.app/og-image.png", // Direct link
         width: 1200,
         height: 630,
         alt: "GuestPilot AI",
@@ -29,9 +25,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GuestPilot AI",
-    description: "Automate your guest post outreach and link building.",
-    images: [`${siteUrl}/og-image.png`],
+    title: "GuestPilot AI: Outreach Tool",
+    description: "Automate guest post outreach and link building.",
+    images: ["https://guests-pilot.vercel.app/og-image.png"],
   },
 };
 
