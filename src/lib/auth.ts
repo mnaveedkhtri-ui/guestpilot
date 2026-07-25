@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import Google from "next-auth/providers/google"; // Google Provider add kiya
+import Google from "next-auth/providers/google";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
-import { memberships, users } from "@/db/schema";
+import { memberships, users, workspaces } from "@/db/schema"; // workspaces import kiya
 import { loginSchema } from "@/lib/validations";
 import { verifyPassword } from "@/lib/password"
 
@@ -48,11 +48,38 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user?.id) {
-        // Agar Google se login kiya hai to user.id Google ki ID hoti hai.
-        // Hum database mein email se check karenge taake workspace mil sake.
-        const dbUser = user.email ? await db.query.users.findFirst({
+        let dbUser = user.email ? await db.query.users.findFirst({
           where: eq(users.email, user.email),
         }) : null;
+
+        // --- NAYA LOGIC: Google USER KO DB MEIN AUTO-ADD KARNA ---
+        if (!dbUser && user.email) {
+          // 1. Naya User Banayein
+          const [newUser] = await db.insert(users).values({
+            name: user.name ?? "Google User",
+            email: user.email,
+            avatarUrl: user.image ?? null,
+            // Agar aapke schema mein passwordHash null nahi ho sakta, toh dummy value daal dein
+            passwordHash: crypto.randomUUID() + crypto.randomUUID(), 
+          }).returning();
+
+          // 2. Naya Workspace Banayein
+          const slug = `${user.email.split('@')[0]}-${Math.random().toString(36).substring(2, 6)}`;
+          const [newWorkspace] = await db.insert(workspaces).values({
+            name: `${newUser.name}'s Workspace`,
+            slug: slug,
+          }).returning();
+
+          // 3. User ko Workspace ka Owner banayein
+          await db.insert(memberships).values({
+            userId: newUser.id,
+            workspaceId: newWorkspace.id,
+            role: "owner",
+          });
+
+          // dbUser ko update kar dein taake niche wala code chale
+          dbUser = newUser; 
+        }
 
         token.userId = dbUser?.id ?? user.id;
 
