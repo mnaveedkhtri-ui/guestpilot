@@ -26,7 +26,8 @@ export function AddProspectForm() {
       </div>
       <div>
         <Label htmlFor="contactEmail">Contact email</Label>
-        <Input id="contactEmail" name="contactEmail" type="email" placeholder="optional" />
+        {/* required add kiya hai aur placeholder behtar kiya hai */}
+        <Input id="contactEmail" name="contactEmail" type="email" placeholder="editor@domain.com" required />
       </div>
       <div className="flex items-end">
         <Button type="submit" disabled={pending} className="w-full">
