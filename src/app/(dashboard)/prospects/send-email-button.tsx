@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Yeh import add kiya
 import { Mail, Send, Sparkles, Loader2 } from "lucide-react";
 
 export function SendEmailButton({ email, domain }: { email: string, domain: string }) {
+  const router = useRouter(); // Yeh router add kiya
   const [open, setOpen] = useState(false);
   const [subject, setSubject] = useState("Guest Post Proposal");
   const [content, setContent] = useState("Hi there, I would love to write a high quality guest post for your website. Let me know if you are open to this!");
@@ -32,6 +34,7 @@ export function SendEmailButton({ email, domain }: { email: string, domain: stri
         setSubject(data.subject);
         setContent(data.body);
         setStatus("AI generated a new pitch!");
+        router.refresh(); // <-- YEH LINE ADD KI HAI TAKE SIDEBAR UPDATE HO
       } else {
         setStatus(data.error || "Failed to generate.");
         setError(true);
