@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { CheckCircle2, Sparkles, ShieldCheck, Zap, ArrowRight } from "lucide-react";
+import { CheckCircle2, Sparkles, Zap, ArrowRight, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Upgrade to Pro | Guest Pilot",
@@ -7,6 +7,11 @@ export const metadata: Metadata = {
 };
 
 export default function UpgradePage() {
+  // WhatsApp links with pre-filled messages
+  const whatsappNumber = "92323219981";
+  const starterLink = `https://wa.me/${whatsappNumber}?text=Hi%20Naveed,%20I%20want%20to%20upgrade%20to%20the%20Starter%20Plan%20($19/month%20or%20Rs.%204,000/month).`;
+  const proLink = `https://wa.me/${whatsappNumber}?text=Hi%20Naveed,%20I%20want%20to%20upgrade%20to%20the%20Pro%20Plan%20($49/month%20or%20Rs.%2010,000/month).`;
+
   return (
     <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden">
       {/* Premium Background Glows */}
@@ -49,13 +54,14 @@ export default function UpgradePage() {
                 <li className="flex items-center gap-3"><CheckCircle2 size={18} className="text-primary" /> AI Pitch Generator</li>
                 <li className="flex items-center gap-3"><CheckCircle2 size={18} className="text-primary" /> Domain Rating Tracker</li>
               </ul>
+              {/* WhatsApp Redirect Button */}
               <a 
-                href="https://www.lemonsqueezy.com/checkout" 
+                href={starterLink} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full bg-surface-2 hover:bg-border text-text text-center font-semibold py-3 rounded-xl transition-colors border border-border"
+                className="w-full bg-surface-2 hover:bg-border text-text text-center font-semibold py-3 rounded-xl transition-colors border border-border flex items-center justify-center gap-2"
               >
-                Get Starter
+                <MessageCircle size={16} /> Get Starter
               </a>
             </div>
           </div>
@@ -82,13 +88,14 @@ export default function UpgradePage() {
                 <li className="flex items-center gap-3"><CheckCircle2 size={18} className="text-primary" /> Priority Support</li>
                 <li className="flex items-center gap-3"><CheckCircle2 size={18} className="text-primary" /> Early access to features</li>
               </ul>
+              {/* WhatsApp Redirect Button */}
               <a 
-                href="https://www.lemonsqueezy.com/checkout" 
+                href={proLink} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-full bg-primary hover:bg-primary-hover text-white text-center font-bold py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 flex items-center justify-center gap-2"
               >
-                Upgrade to Pro <Sparkles size={16} />
+                <MessageCircle size={16} /> Upgrade to Pro
               </a>
             </div>
           </div>
@@ -99,8 +106,8 @@ export default function UpgradePage() {
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl"></div>
           
           <div className="relative z-10">
-            <h2 className="text-2xl font-bold text-text mb-2">Other Payment Methods</h2>
-            <p className="text-text-muted mb-8">We support secure international payments and local mobile transfers for your convenience.</p>
+            <h2 className="text-2xl font-bold text-text mb-2">How to Upgrade</h2>
+            <p className="text-text-muted mb-8">Click on the plan above to contact us on WhatsApp and complete your payment securely.</p>
             
             <div className="grid md:grid-cols-2 gap-8">
               
@@ -108,16 +115,21 @@ export default function UpgradePage() {
               <div className="bg-ink/50 border border-border rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <ShieldCheck size={20} className="text-primary" />
+                    <MessageCircle size={20} className="text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold text-text">International</h3>
+                  <h3 className="text-lg font-semibold text-text">International Clients</h3>
                 </div>
                 <p className="text-sm text-text-muted mb-4">
-                  Click the buttons above to pay via Credit Card or PayPal through our secure gateway.
+                  Message us on WhatsApp to get a secure payment link for Credit Card or PayPal.
                 </p>
-                <p className="text-xs text-text-muted">
-                  Powered by Lemonsqueezy. Credits are added to your account instantly after payment.
-                </p>
+                <a 
+                  href={proLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-hover font-medium transition-colors"
+                >
+                  Contact us on WhatsApp <ArrowRight size={14} />
+                </a>
               </div>
 
               {/* Local Clients */}
@@ -133,7 +145,7 @@ export default function UpgradePage() {
                   <p>JazzCash: <span className="text-text">03041394645</span></p>
                 </div>
                 <a 
-                  href="https://wa.me/92323219981" 
+                  href={starterLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-hover font-medium transition-colors"
