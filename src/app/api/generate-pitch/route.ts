@@ -10,67 +10,48 @@ export async function POST(req: Request) {
   try {
     const { domain } = await req.json();
 
-    if (!process.env.XAI_API_KEY) {
+    if (!process.env.GROQ_API_KEY) {
       return NextResponse.json({ error: "API Key missing in Vercel Environment Variables." }, { status: 500 });
     }
 
-    const response = await fetch("https://api.x.ai/v1/chat/completions", {
+    const prompt = `You are an expert SEO outreach specialist. Write a concise, highly personalized guest post pitch email. Do not use em dashes. Keep it under 150 words. Return the response strictly as a JSON object with 'subject' and 'body' keys.\n\nWrite a guest post pitch email to the team at ${domain}. Suggest a topic relevant to their niche.`;
+
+    // Groq API ko call karein (Llama 3 model use kar rahe hain jo free aur fast hai)
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.XAI_API_KEY}`,
+        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "grok-2-latest",
+        model: "llama-3.3-70b-versatile",
         messages: [
-          {
-            role: "system",
-            content: "You are an expert SEO outreach specialist. Write a concise, highly personalized guest post pitch email. Do not use em dashes. Keep it under 150 words. Return the response strictly as a JSON object with 'subject' and 'body' keys."
-          },
-          {
-            role: "user",
-            content: `Write a guest post pitch email to the team at ${domain}. Suggest a topic relevant to their niche.`
-          }
+          { role: "system", content: "You are an expert SEO outreach specialist. Return the response strictly as a JSON object with 'subject' and 'body' keys." },
+          { role: "user", content: prompt }
         ],
-        // response_format hata diya kyunke Grok isko support nahi kar raha tha
+        response_format: { type: "json_object" },
       }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Grok API Raw Error:", data);
-      // Pura data string mein convert kar ke bhej do
+      console.error("Groq API Raw Error:", data);
       const errorMessage = JSON.stringify(data);
-      return NextResponse.json({ error: `Grok API Response: ${errorMessage}` }, { status: response.status });
+      return NextResponse.json({ error: `Groq API Response: ${errorMessage}` }, { status: response.status });
     }
 
     if (data.choices && data.choices.length > 0) {
       const content = data.choices[0].message.content;
+      const parsed = JSON.parse(content);
       
-      // Grok kabhi kabhi markdown code block mein JSON bhejta hai, usko clean karein
-      let cleanContent = content;
-      if (cleanContent.startsWith("```json")) {
-        cleanContent = cleanContent.replace(/```json/g, "").replace(/```/g, "").trim();
-      }
-
-      try {
-        const parsed = JSON.parse(cleanContent);
-        return NextResponse.json({ 
-          success: true, 
-          subject: parsed.subject, 
-          body: parsed.body 
-        });
-      } catch (parseError) {
-        // Agar JSON parse na ho, toh simple text return kar dein
-        return NextResponse.json({ 
-          success: true, 
-          subject: "Guest Post Proposal", 
-          body: cleanContent 
-        });
-      }
+      return NextResponse.json({ 
+        success: true, 
+        subject: parsed.subject, 
+        body: parsed.body 
+      });
     } else {
-      return NextResponse.json({ error: "Grok returned an unexpected response format." }, { status: 500 });
+      return NextResponse.json({ error: "Groq returned an unexpected response format." }, { status: 500 });
     }
 
   } catch (error) {
