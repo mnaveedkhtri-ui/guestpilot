@@ -1,57 +1,37 @@
 "use client";
 
-import { useTransition } from "react";
-import { updateProspectStatusAction } from "@/actions/prospects";
-import { prospectStatuses, type ProspectStatus } from "@/db/schema";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+// baqi imports...
 
-const STATUS_LABEL: Record<ProspectStatus, string> = {
-  new: "New",
-  contacted: "Contacted",
-  in_discussion: "In discussion",
-  accepted: "Accepted",
-  rejected: "Rejected",
-  published: "Published",
-};
+export function StatusSelect({ prospectId, status }: { prospectId: string, status: string }) {
+  const [currentStatus, setCurrentStatus] = useState(status);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter(); // Yeh add karein
 
-const STATUS_COLOR: Record<ProspectStatus, string> = {
-  new: "text-text-muted",
-  contacted: "text-primary",
-  in_discussion: "text-accent",
-  accepted: "text-success",
-  rejected: "text-danger",
-  published: "text-success",
-};
+  const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setIsLoading(true);
+    const newStatus = e.target.value;
+    setCurrentStatus(newStatus);
 
-export function StatusSelect({
-  prospectId,
-  status,
-}: {
-  prospectId: string;
-  status: ProspectStatus;
-}) {
-  const [isPending, startTransition] = useTransition();
+    try {
+      const res = await fetch("/api/prospects/update-status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prospectId, status: newStatus }),
+      });
+
+      if (res.ok) {
+        router.refresh(); // Yeh add karein taake table turant update ho
+      }
+    } catch (error) {
+      console.error("Failed to update status");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <select
-      value={status}
-      disabled={isPending}
-      onChange={(event) => {
-        const next = event.target.value as ProspectStatus;
-        startTransition(() => {
-          updateProspectStatusAction(prospectId, next);
-        });
-      }}
-      className={cn(
-        "bg-surface-2 border border-border rounded-md text-xs font-medium px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary",
-        STATUS_COLOR[status]
-      )}
-    >
-      {prospectStatuses.map((value) => (
-        <option key={value} value={value} className="text-text bg-surface">
-          {STATUS_LABEL[value]}
-        </option>
-      ))}
-    </select>
+    // Yahan aapka select tag hoga
   );
 }
