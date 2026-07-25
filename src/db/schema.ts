@@ -19,6 +19,7 @@ export const users = sqliteTable(
       .$defaultFn(() => crypto.randomUUID()),
     name: text("name").notNull(),
     email: text("email").notNull(),
+    credits: integer("credits").default(10).notNull(), // <-- YE LINE ADD KI HAI
     passwordHash: text("password_hash").notNull(),
     avatarUrl: text("avatar_url"),
     createdAt: integer("created_at", { mode: "timestamp" })
