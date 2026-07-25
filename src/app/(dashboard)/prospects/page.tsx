@@ -5,6 +5,7 @@ import { prospects } from "@/db/schema";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { AddProspectForm } from "./add-prospect-form";
 import { StatusSelect } from "./status-select";
+import { DomainRatingCell } from "./domain-rating-cell";
 
 export default async function ProspectsPage() {
   const session = await auth();
@@ -51,6 +52,7 @@ export default async function ProspectsPage() {
               <thead>
                 <tr className="text-left text-text-muted border-b border-border">
                   <th className="font-medium px-5 py-3">Domain</th>
+                  <th className="font-medium px-5 py-3">DR</th>
                   <th className="font-medium px-5 py-3">Contact</th>
                   <th className="font-medium px-5 py-3">Status</th>
                   <th className="font-medium px-5 py-3">Added</th>
@@ -60,8 +62,14 @@ export default async function ProspectsPage() {
                 {rows.map((row) => (
                   <tr key={row.id} className="border-b border-border last:border-0">
                     <td className="px-5 py-3 text-text font-medium">{row.domain}</td>
+                    <td className="px-5 py-3">
+                      <DomainRatingCell
+                        prospectId={row.id}
+                        domainRating={row.domainRating}
+                      />
+                    </td>
                     <td className="px-5 py-3 text-text-muted">
-                      {row.contactEmail ?? "—"}
+                      {row.contactEmail ?? "-"}
                     </td>
                     <td className="px-5 py-3">
                       <StatusSelect prospectId={row.id} status={row.status} />
@@ -76,6 +84,19 @@ export default async function ProspectsPage() {
           )}
         </CardContent>
       </Card>
+
+      <p className="text-xs text-text-muted">
+        Domain Rating by{" "}
+        <a
+          href="https://ahrefs.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:text-primary-hover"
+        >
+          Ahrefs
+        </a>
+        .
+      </p>
     </div>
   );
 }

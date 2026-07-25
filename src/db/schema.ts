@@ -2,6 +2,7 @@ import {
   sqliteTable,
   text,
   integer,
+  real,
   uniqueIndex,
 } from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
@@ -127,6 +128,12 @@ export const prospects = sqliteTable("prospects", {
     .notNull()
     .default("new"),
   notes: text("notes"),
+  // Real Domain Rating pulled from Ahrefs' free public endpoint. Null until
+  // fetched. See src/lib/ahrefs.ts for the fetch logic.
+  domainRating: real("domain_rating"),
+  domainRatingCheckedAt: integer("domain_rating_checked_at", {
+    mode: "timestamp",
+  }),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
