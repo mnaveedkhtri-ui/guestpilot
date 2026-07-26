@@ -71,6 +71,8 @@ A strong guest post pitch is short, specific, and proves you've actually looked 
 
 Keep the entire email under 150 words. Editors skim, and a long pitch signals more work for them to evaluate, not more effort on your part.
 
+![Hand typing an outreach pitch email on a laptop with a green sent checkmark](/blog-images/guest-post-outreach-1.jpg)
+
 ## Step 4: Organize Your Pipeline
 
 Once outreach volume grows past a handful of sites, tracking everything in your head or a scattered spreadsheet starts to break down fast. This is where having prospects organized by status, new, contacted, in discussion, accepted, published, actually matters, since it's the difference between knowing exactly who needs a follow-up today and losing track of half your pipeline. [GuestPilot's campaign and status pipeline features](/register) exist specifically to keep this organized without needing a spreadsheet at all.
@@ -83,6 +85,8 @@ Most replies to outreach come from a follow-up, not the first email. A single un
 - Keep it short, referencing the original email rather than repeating the full pitch
 - Limit yourself to two follow-ups total. A third message after two unanswered ones tends to hurt the relationship rather than help it
 - If there's still no response after that, move on and revisit the site again in a few months rather than pushing further
+
+![Dark monitor showing a glowing network diagram of connected websites with a few nodes highlighted in green](/blog-images/guest-post-outreach-2.jpg)
 
 ## Common Guest Post Outreach Mistakes
 
