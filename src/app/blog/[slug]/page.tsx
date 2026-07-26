@@ -32,6 +32,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // Lightweight markdown to HTML converter, no external dependency required.
+// Uses explicit Tailwind classes because Tailwind's preflight reset strips
+// default heading font-size/margin and default list bullets/padding.
 function markdownToHtml(markdown: string): string {
   let html = markdown.trim();
 
@@ -48,11 +50,11 @@ function markdownToHtml(markdown: string): string {
   );
 
   // Bold: **text**
-  html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
 
-  // Headings
-  html = html.replace(/^### (.*$)/gim, "<h3>$1</h3>");
-  html = html.replace(/^## (.*$)/gim, "<h2>$1</h2>");
+  // Headings, explicit classes since Tailwind preflight strips default heading styles
+  html = html.replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold text-white mt-8 mb-3">$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold text-white mt-10 mb-4">$1</h2>');
 
   // Split into blocks by blank lines
   const blocks = html.split(/\n\s*\n/);
@@ -62,18 +64,18 @@ function markdownToHtml(markdown: string): string {
     if (!trimmed) return "";
 
     // Already a heading or image, leave as-is
-    if (/^<h[23]>/.test(trimmed) || /^<img/.test(trimmed)) {
+    if (/^<h[23]/.test(trimmed) || /^<img/.test(trimmed)) {
       return trimmed;
     }
 
-    // Unordered list block
+    // Unordered list block, explicit classes since Tailwind preflight removes default bullets
     if (/^-\s/.test(trimmed)) {
       const items = trimmed
         .split("\n")
         .filter((line) => line.trim().startsWith("-"))
-        .map((line) => `<li>${line.replace(/^-\s*/, "")}</li>`)
+        .map((line) => `<li class="mb-2">${line.replace(/^-\s*/, "")}</li>`)
         .join("");
-      return `<ul>${items}</ul>`;
+      return `<ul class="list-disc list-outside pl-6 space-y-1 my-4 text-gray-300">${items}</ul>`;
     }
 
     // Ordered list block
@@ -81,13 +83,13 @@ function markdownToHtml(markdown: string): string {
       const items = trimmed
         .split("\n")
         .filter((line) => /^\d+\./.test(line.trim()))
-        .map((line) => `<li>${line.replace(/^\d+\.\s*/, "")}</li>`)
+        .map((line) => `<li class="mb-2">${line.replace(/^\d+\.\s*/, "")}</li>`)
         .join("");
-      return `<ol>${items}</ol>`;
+      return `<ol class="list-decimal list-outside pl-6 space-y-1 my-4 text-gray-300">${items}</ol>`;
     }
 
     // Regular paragraph
-    return `<p>${trimmed.replace(/\n/g, "<br/>")}</p>`;
+    return `<p class="mb-5 text-gray-300 leading-relaxed">${trimmed.replace(/\n/g, "<br/>")}</p>`;
   });
 
   return renderedBlocks.join("\n");
@@ -130,7 +132,7 @@ export default async function BlogPostPage({ params }: Props) {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent pb-1 leading-[1.2]">
             {post.title}
           </h1>
         </div>
@@ -148,7 +150,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Article Content */}
         <article
-          className="prose prose-invert max-w-none text-lg text-gray-300 leading-relaxed prose-headings:text-white prose-a:text-blue-400 prose-strong:text-white"
+          className="max-w-none"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
 
