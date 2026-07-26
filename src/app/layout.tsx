@@ -4,18 +4,18 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://guests-pilot.vercel.app"),
   title: "GuestPilot AI: Outreach Tool",
-  description: "Automate guest post outreach and link building.",
+  description: "Automate guest post outreach and manage your link building pipeline.",
   verification: {
     google: "wYFUIXoVNRkPCSeAExJZhbNGbE9pcbuFswY8d8GCIdw",
   },
   openGraph: {
     title: "GuestPilot AI: Outreach Tool",
-    description: "Automate guest post outreach and link building.",
+    description: "Automate guest post outreach and manage your link building pipeline.",
     url: "https://guests-pilot.vercel.app",
     siteName: "GuestPilot AI",
     images: [
       {
-        url: "https://guests-pilot.vercel.app/og-image.png", // Direct link
+        url: "https://guests-pilot.vercel.app/og-image.png",
         width: 1200,
         height: 630,
         alt: "GuestPilot AI",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "GuestPilot AI: Outreach Tool",
-    description: "Automate guest post outreach and link building.",
+    description: "Automate guest post outreach and manage your link building pipeline.",
     images: ["https://guests-pilot.vercel.app/og-image.png"],
   },
 };
