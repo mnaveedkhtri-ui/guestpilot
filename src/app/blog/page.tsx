@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Calendar, User, Eye, Folder } from "lucide-react";
+import { blogPosts } from "@/data/blog-posts";
 
 export const metadata: Metadata = {
   title: "SEO & Link Building Blog | Guest Pilot",
   description: "Learn the latest guest post strategies, link building tactics, and SEO tips to improve your search engine rankings.",
 };
 
-// Sample data remove kar diya hai. Aap future mein yahan DB se data la sakte hain.
-const posts: any[] = []; 
+const posts = blogPosts;
 
 export default function BlogPage() {
   return (
@@ -33,7 +33,7 @@ export default function BlogPage() {
                 <p className="text-gray-600 text-sm mt-2">Check back soon for amazing SEO insights!</p>
               </div>
             ) : (
-              posts.map((post: any) => (
+              posts.map((post) => (
                 <article key={post.slug} className="group relative bg-gray-900/50 border border-gray-800 rounded-xl p-8 transition-all duration-500 hover:border-blue-500/50 hover:bg-gray-900 hover:-translate-y-1">
                   
                   {/* Meta Info Top */}
