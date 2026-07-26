@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, User, Eye, Folder } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
 
@@ -35,8 +36,20 @@ export default function BlogPage() {
             ) : (
               <div className="grid sm:grid-cols-2 gap-6">
                 {posts.map((post) => (
-                <article key={post.slug} className="group relative bg-gray-900/50 border border-gray-800 rounded-xl p-6 transition-all duration-500 hover:border-blue-500/50 hover:bg-gray-900 hover:-translate-y-1 flex flex-col">
+                <article key={post.slug} className="group relative bg-gray-900/50 border border-gray-800 rounded-xl overflow-hidden transition-all duration-500 hover:border-blue-500/50 hover:bg-gray-900 hover:-translate-y-1 flex flex-col">
                   
+                  {/* Hero Image */}
+                  <Link href={`/blog/${post.slug}`} className="relative w-full h-44 block overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.imageAlt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </Link>
+
+                  <div className="p-6 flex flex-col flex-grow">
+
                   {/* Meta Info Top */}
                   <div className="flex items-center flex-wrap gap-3 text-xs text-gray-500 mb-3">
                     <span className="flex items-center gap-1.5 text-blue-400 font-medium">
@@ -71,6 +84,7 @@ export default function BlogPage() {
                     Continue Reading 
                     <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
+                  </div>
                 </article>
                 ))}
               </div>
