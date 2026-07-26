@@ -21,8 +21,8 @@ import { HeroVisual } from "@/components/landing/hero-visual";
 import { Reveal } from "@/components/landing/reveal";
 
 export const metadata: Metadata = {
-  title: "GuestPilot AI: Guest Post Outreach Tool",
-  description: "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline.",
+  title: "GuestPilot AI: Guest Post Outreach & Link Building", // 51 Characters
+  description: "Automate guest post outreach and link building. Track prospects, generate AI pitches, and manage SEO campaigns in one smart workspace.", // 137 Characters
   keywords: [
     "guest post outreach software",
     "link building tool",
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "GuestPilot AI: Guest Post Outreach Tool",
-    description: "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline.",
+    title: "GuestPilot AI: Guest Post Outreach & Link Building",
+    description: "Automate guest post outreach and link building. Track prospects, generate AI pitches, and manage SEO campaigns in one smart workspace.",
     type: "website",
     url: "https://guests-pilot.vercel.app",
     images: [
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GuestPilot AI: Guest Post Outreach Tool",
-    description: "Track guest post prospects, organize outreach campaigns, and manage your link building pipeline.",
+    title: "GuestPilot AI: Guest Post Outreach & Link Building",
+    description: "Automate guest post outreach and link building. Track prospects, generate AI pitches, and manage SEO campaigns in one smart workspace.",
     images: ["https://guests-pilot.vercel.app/og-image.png"],
   },
 };
