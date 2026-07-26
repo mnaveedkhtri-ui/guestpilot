@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, User, Eye, Folder } from "lucide-react";
+import { ArrowLeft, Calendar, User, Eye, Folder, List } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
 
 type Props = {
@@ -31,9 +31,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
+type Heading = { text: string; id: string; level: 2 | 3 };
+
+function extractHeadings(markdown: string): Heading[] {
+  const headings: Heading[] = [];
+  const lines = markdown.split("\n");
+  for (const line of lines) {
+    const h2Match = line.match(/^##\s+(.*)$/);
+    const h3Match = line.match(/^###\s+(.*)$/);
+    if (h2Match) {
+      headings.push({ text: h2Match[1].trim(), id: slugify(h2Match[1]), level: 2 });
+    } else if (h3Match) {
+      headings.push({ text: h3Match[1].trim(), id: slugify(h3Match[1]), level: 3 });
+    }
+  }
+  return headings;
+}
+
 // Lightweight markdown to HTML converter, no external dependency required.
 // Uses explicit Tailwind classes because Tailwind's preflight reset strips
 // default heading font-size/margin and default list bullets/padding.
+// Headings get an id attribute so the table of contents can link to them.
 function markdownToHtml(markdown: string): string {
   let html = markdown.trim();
 
@@ -52,9 +78,16 @@ function markdownToHtml(markdown: string): string {
   // Bold: **text**
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
 
-  // Headings, explicit classes since Tailwind preflight strips default heading styles
-  html = html.replace(/^### (.*$)/gim, '<h3 class="text-2xl font-bold text-white mt-8 mb-3">$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2 class="text-3xl font-bold text-white mt-10 mb-4">$1</h2>');
+  // Headings, explicit classes since Tailwind preflight strips default heading styles.
+  // Each heading gets an id derived from its text so the TOC can link directly to it.
+  html = html.replace(/^### (.*$)/gim, (_m, text) => {
+    const id = slugify(text);
+    return `<h3 id="${id}" class="text-2xl font-bold text-white mt-8 mb-3 scroll-mt-24">${text}</h3>`;
+  });
+  html = html.replace(/^## (.*$)/gim, (_m, text) => {
+    const id = slugify(text);
+    return `<h2 id="${id}" class="text-3xl font-bold text-white mt-10 mb-4 scroll-mt-24">${text}</h2>`;
+  });
 
   // Split into blocks by blank lines
   const blocks = html.split(/\n\s*\n/);
@@ -104,6 +137,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const contentHtml = markdownToHtml(post.content);
+  const headings = extractHeadings(post.content);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -147,6 +181,28 @@ export default async function BlogPostPage({ params }: Props) {
             priority
           />
         </div>
+
+        {/* Table of Contents */}
+        {headings.length > 0 && (
+          <nav className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 mb-10">
+            <div className="flex items-center gap-2 text-sm font-bold text-white mb-4">
+              <List size={16} className="text-blue-400" />
+              Table of Contents
+            </div>
+            <ul className="space-y-2 text-sm">
+              {headings.map((h) => (
+                <li key={h.id} className={h.level === 3 ? "ml-4" : ""}>
+                  <a
+                    href={`#${h.id}`}
+                    className="text-gray-400 hover:text-blue-400 transition-colors duration-200"
+                  >
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
 
         {/* Article Content */}
         <article
