@@ -17,7 +17,7 @@ export default function BlogPage() {
         
         {/* Header */}
         <div className="mb-12 border-b border-gray-800 pb-8">
-          <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent pb-2 leading-[1.2]">
             Guest Pilot Blog
           </h1>
           <p className="text-gray-400 mt-3 text-lg">Insights, strategies, and tips for modern SEO and link building.</p>
@@ -26,39 +26,43 @@ export default function BlogPage() {
         <div className="grid lg:grid-cols-3 gap-12">
           
           {/* Blog Posts List (Left Side) */}
-          <div className="lg:col-span-2 space-y-10">
+          <div className="lg:col-span-2">
             {posts.length === 0 ? (
               <div className="text-center py-20 border border-dashed border-gray-800 rounded-xl bg-gray-900/30">
                 <p className="text-gray-500 text-lg">No blog posts published yet.</p>
                 <p className="text-gray-600 text-sm mt-2">Check back soon for amazing SEO insights!</p>
               </div>
             ) : (
-              posts.map((post) => (
-                <article key={post.slug} className="group relative bg-gray-900/50 border border-gray-800 rounded-xl p-8 transition-all duration-500 hover:border-blue-500/50 hover:bg-gray-900 hover:-translate-y-1">
+              <div className="grid sm:grid-cols-2 gap-6">
+                {posts.map((post) => (
+                <article key={post.slug} className="group relative bg-gray-900/50 border border-gray-800 rounded-xl p-6 transition-all duration-500 hover:border-blue-500/50 hover:bg-gray-900 hover:-translate-y-1 flex flex-col">
                   
                   {/* Meta Info Top */}
-                  <div className="flex items-center flex-wrap gap-4 text-xs text-gray-500 mb-4">
+                  <div className="flex items-center flex-wrap gap-3 text-xs text-gray-500 mb-3">
                     <span className="flex items-center gap-1.5 text-blue-400 font-medium">
-                      <Folder size={14} /> {post.category}
+                      <Folder size={13} /> {post.category}
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <Calendar size={14} /> {post.date}
+                      <Calendar size={13} /> {post.date}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center flex-wrap gap-3 text-xs text-gray-500 mb-4">
+                    <span className="flex items-center gap-1.5">
+                      <User size={13} /> By: {post.author}
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <User size={14} /> By: {post.author}
-                    </span>
-                    <span className="hidden sm:flex items-center gap-1.5">
-                      <Eye size={14} /> {post.views} views
+                      <Eye size={13} /> {post.views} views
                     </span>
                   </div>
 
                   {/* Title & Excerpt */}
-                  <h2 className="text-2xl font-bold mb-3 transition-colors duration-300 group-hover:text-blue-400">
+                  <h2 className="text-xl font-bold mb-3 leading-snug transition-colors duration-300 group-hover:text-blue-400">
                     <Link href={`/blog/${post.slug}`}>
                       {post.title}
                     </Link>
                   </h2>
-                  <p className="text-gray-400 leading-relaxed mb-6">
+                  <p className="text-gray-400 leading-relaxed mb-6 text-sm flex-grow">
                     {post.excerpt}
                   </p>
 
@@ -68,7 +72,8 @@ export default function BlogPage() {
                     <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </article>
-              ))
+                ))}
+              </div>
             )}
           </div>
 
