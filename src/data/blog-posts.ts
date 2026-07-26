@@ -92,7 +92,7 @@ Most replies to outreach come from a follow-up, not the first email. A single un
 
 - Sending the identical pitch to dozens of sites without any customization
 - Pitching topics the site has already covered recently
-- Asking for a dofollow link explicitly in the first email, which reads as more concerned with SEO value than providing something useful to their readers
+- Asking for a dofollow link explicitly in the first email, which reads as more concerned with SEO value than providing something useful to their readers, and large-scale guest posting done purely for links is exactly what [Google's spam policies](https://developers.google.com/search/docs/essentials/spam-policies) warn against
 - Disappearing after acceptance instead of delivering the draft on the agreed timeline
 - Not tracking outcomes, which makes it impossible to tell which types of pitches or sites actually convert over time
 
