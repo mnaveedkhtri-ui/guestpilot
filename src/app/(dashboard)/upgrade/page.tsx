@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function UpgradePage() {
   // WhatsApp links with pre-filled messages
-  const whatsappNumber = "92323219981";
+  const whatsappNumber = "923323219981";
   const starterLink = `https://wa.me/${whatsappNumber}?text=Hi%20Naveed,%20I%20want%20to%20upgrade%20to%20the%20Starter%20Plan%20($19/month%20or%20Rs.%204,000/month).`;
   const proLink = `https://wa.me/${whatsappNumber}?text=Hi%20Naveed,%20I%20want%20to%20upgrade%20to%20the%20Pro%20Plan%20($49/month%20or%20Rs.%2010,000/month).`;
 
