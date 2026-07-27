@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import { db } from "@/db";
 import { publisherSites } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { auth } from "@/lib/auth"; // Admin check ke liye
-import { Globe2, Mail, Tag } from "lucide-react";
-import { DeleteSiteButton } from "./delete-site-button"; // Naya button import kiya
+import { auth } from "@/lib/auth";
+import { Globe2, Tag } from "lucide-react";
+import { DeleteSiteButton } from "./delete-site-button";
+import { OrderButton } from "./order-button"; // Naya button import kiya
 
 export const metadata: Metadata = {
   title: "Publisher Directory | Buy Guest Posts | Guest Pilot",
@@ -14,7 +15,6 @@ export const metadata: Metadata = {
 export default async function DirectoryPage() {
   let sites: typeof publisherSites.$inferSelect[] = [];
   
-  // Admin check
   const session = await auth();
   const isAdmin = session?.user?.email === "naveedkhtri7@gmail.com";
 
@@ -72,13 +72,9 @@ export default async function DirectoryPage() {
                 <span>Niche: {site.niche}</span>
               </div>
 
-              <div className="mt-auto">
-                <a 
-                  href={`mailto:${site.contactEmail}?subject=Guest Post Inquiry for ${site.domain}`}
-                  className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-2 rounded-lg flex items-center justify-center gap-2 transition-colors"
-                >
-                  <Mail size={16} /> Contact Publisher
-                </a>
+              <div className="mt-auto space-y-3">
+                {/* Naya Order Now Button */}
+                <OrderButton siteId={site.id} domain={site.domain} price={site.price} />
                 
                 {/* Sirf Admin ko Delete ka button dikhega */}
                 {isAdmin && (
