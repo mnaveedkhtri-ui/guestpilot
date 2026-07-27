@@ -35,7 +35,7 @@ export function OrderButton({ siteId, domain, price }: { siteId: string; domain:
 
       if (res.ok) {
         // 2. WhatsApp ka message prepare karein
-        const adminWhatsApp = "92323219981"; // Aapka WhatsApp number
+        const adminWhatsApp = "923323219981"; // Aapka WhatsApp number
         const message = `*New Guest Post Order!*%0A%0A*Order ID:* ${data.orderId}%0A*Website:* ${domain}%0A*Price:* $${price}%0A%0A*Buyer Details:*%0AName: ${name}%0AEmail: ${email}%0A%0A*Article Topic:*%0A${topic}%0A%0A*Special Instructions:*%0A${instructions || "None"}%0A%0AI will process the payment now. Please confirm.`;
         
         // 3. WhatsApp par redirect karein
