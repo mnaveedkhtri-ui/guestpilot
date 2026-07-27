@@ -4,24 +4,13 @@ import { sql } from "drizzle-orm";
 
 export async function GET() {
   try {
-    // Publisher Sites table create karna
-    await db.run(sql`
-      CREATE TABLE IF NOT EXISTS publisher_sites (
-        id TEXT PRIMARY KEY,
-        user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        domain TEXT NOT NULL,
-        niche TEXT NOT NULL,
-        dr INTEGER NOT NULL,
-        traffic INTEGER NOT NULL,
-        price INTEGER NOT NULL,
-        link_type TEXT NOT NULL DEFAULT 'Dofollow',
-        status TEXT NOT NULL DEFAULT 'pending',
-        created_at INTEGER NOT NULL DEFAULT (unixepoch())
-      );
-    `);
-    return NextResponse.json({ success: true, message: "Publisher Sites table created successfully!" });
+    // Contact Email column add karna
+    await db.run(sql`ALTER TABLE publisher_sites ADD COLUMN contact_email TEXT;`);
+    return NextResponse.json({ success: true, message: "Contact email column added!" });
   } catch (error: any) {
-    console.error("Migration error:", error);
+    if (error.message.includes("duplicate column name")) {
+      return NextResponse.json({ success: true, message: "Column already exists." });
+    }
     return NextResponse.json({ success: false, error: String(error) }, { status: 500 });
   }
 }
