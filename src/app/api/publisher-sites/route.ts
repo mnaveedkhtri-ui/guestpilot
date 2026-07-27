@@ -2,7 +2,19 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/db";
 import { publisherSites } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
+// Buyers ke liye: Approved websites fetch karna
+export async function GET() {
+  try {
+    const sites = await db.select().from(publisherSites).where(eq(publisherSites.status, "approved"));
+    return NextResponse.json(sites);
+  } catch (error) {
+    return NextResponse.json({ error: "Failed to fetch sites" }, { status: 500 });
+  }
+}
+
+// Sellers ke liye: Naya website submit karna
 export async function POST(req: Request) {
   const session = await auth();
   if (!session?.user?.id) {
@@ -20,7 +32,8 @@ export async function POST(req: Request) {
       traffic: body.traffic,
       price: body.price,
       linkType: body.linkType,
-      status: "pending", // Admin approve karega
+      contactEmail: body.contactEmail, // Naya field save hoga
+      status: "pending", 
     });
 
     return NextResponse.json({ success: true });
