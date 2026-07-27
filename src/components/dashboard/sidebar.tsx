@@ -9,15 +9,16 @@ import {
   Settings,
   Search,
   Zap,
+  Store, // Yahan Store import ho gaya hai
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { href: "/list-site", label: "List Your Site", icon: Store }, 
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/finder", label: "Find Prospects", icon: Search },
   { href: "/prospects", label: "Prospects", icon: Globe2 },
   { href: "/campaigns", label: "Campaigns", icon: Megaphone },
+  { href: "/list-site", label: "List Your Site", icon: Store }, // Yahan rakha hai
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
