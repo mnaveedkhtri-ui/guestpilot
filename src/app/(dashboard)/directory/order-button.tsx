@@ -67,62 +67,70 @@ export function OrderButton({ siteId, domain, price }: { siteId: string; domain:
       </button>
 
       {open && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 w-full max-w-md space-y-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center">
+        // Background Overlay (Click karne se band ho jayega)
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          onClick={() => setOpen(false)} 
+        >
+          {/* Popup Card (Click karne se band nahi hoga) */}
+          <div 
+            className="w-full max-w-md rounded-xl border border-gray-700 bg-gray-900 p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-4 flex justify-between items-center">
               <h3 className="text-xl font-bold text-white">Order Guest Post</h3>
               <span className="text-sm text-gray-400">{domain}</span>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Your Name</label>
+                <label className="mb-1 block text-sm text-gray-400">Your Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="John Doe"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Your Email</label>
+                <label className="mb-1 block text-sm text-gray-400">Your Email</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="john@example.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Article Topic / Anchor Text</label>
+                <label className="mb-1 block text-sm text-gray-400">Article Topic / Anchor Text</label>
                 <input
                   type="text"
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   required
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Best SEO Tools 2024"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Special Instructions (Optional)</label>
+                <label className="mb-1 block text-sm text-gray-400">Special Instructions (Optional)</label>
                 <textarea
                   value={instructions}
                   onChange={(e) => setInstructions(e.target.value)}
                   rows={3}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full resize-none rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Any specific URLs or guidelines?"
                 ></textarea>
               </div>
 
-              <div className="bg-gray-800 p-3 rounded-lg text-sm text-gray-300 flex justify-between">
+              <div className="flex justify-between rounded-lg bg-gray-800 p-3 text-sm text-gray-300">
                 <span>Total Price:</span>
                 <span className="font-bold text-white">${price}</span>
               </div>
@@ -131,14 +139,14 @@ export function OrderButton({ siteId, domain, price }: { siteId: string; domain:
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="flex-1 border border-gray-600 text-gray-300 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+                  className="flex-1 rounded-lg border border-gray-600 py-2 text-gray-300 transition-colors hover:bg-gray-800"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-green-600 py-2 text-white transition-colors hover:bg-green-700 disabled:opacity-50"
                 >
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send size={16} />}
                   Place Order
