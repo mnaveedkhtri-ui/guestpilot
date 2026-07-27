@@ -181,3 +181,32 @@ export const campaignsRelations = relations(campaigns, ({ one }) => ({
     references: [workspaces.id],
   }),
 }));
+// ---------------------------------------------------------------------------
+// Publisher Directory (Marketplace)
+// ---------------------------------------------------------------------------
+
+export const publisherSites = sqliteTable("publisher_sites", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  domain: text("domain").notNull(),
+  niche: text("niche").notNull(),
+  dr: integer("dr").notNull(),
+  traffic: integer("traffic").notNull(),
+  price: integer("price").notNull(), // Price in USD
+  linkType: text("link_type").notNull().default("Dofollow"),
+  status: text("status").notNull().default("pending"), // pending, approved, rejected
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .notNull()
+    .default(sql`(unixepoch())`),
+});
+
+export const publisherSitesRelations = relations(publisherSites, ({ one }) => ({
+  user: one(users, {
+    fields: [publisherSites.userId],
+    references: [users.id],
+  }),
+}));
