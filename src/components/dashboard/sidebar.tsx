@@ -45,7 +45,6 @@ export function Sidebar({
 
   return (
     <>
-      {/* Mobile Overlay */}
       {isMobileOpen && (
         <div 
           className="fixed inset-0 z-40 bg-black/60 md:hidden"
@@ -61,7 +60,6 @@ export function Sidebar({
           <Link href="/dashboard" className="font-display text-base font-semibold text-text">
             GuestPilot <span className="text-accent">AI</span>
           </Link>
-          {/* Close button for mobile */}
           <button onClick={onMobileClose} className="md:hidden text-text-muted hover:text-text">
             <X size={20} />
           </button>
