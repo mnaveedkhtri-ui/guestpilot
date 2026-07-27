@@ -20,7 +20,6 @@ export function Topbar({
 
   return (
     <header className="h-16 flex items-center justify-between border-b border-border bg-surface px-4 md:px-6">
-      {/* Mobile Menu Button (Sirf mobile par dikhega) */}
       <button 
         onClick={onMenuClick} 
         className="md:hidden text-text-muted hover:text-text transition-colors"
@@ -29,7 +28,6 @@ export function Topbar({
         <Menu size={24} />
       </button>
       
-      {/* Desktop spacer */}
       <div className="hidden md:block" />
       
       <div className="flex items-center gap-2 sm:gap-4">
