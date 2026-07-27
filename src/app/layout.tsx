@@ -1,44 +1,34 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { db } from "@/db";
+import { users } from "@/db/schema";
+import { eq } from "drizzle-orm";
+import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://guests-pilot.vercel.app"),
-  title: "GuestPilot AI: Outreach Tool",
-  description: "Automate guest post outreach and manage your link building pipeline.",
-  verification: {
-    google: "wYFUIXoVNRkPCSeAExJZhbNGbE9pcbuFswY8d8GCIdw",
-  },
-  openGraph: {
-    title: "GuestPilot AI: Outreach Tool",
-    description: "Automate guest post outreach and manage your link building pipeline.",
-    url: "https://guests-pilot.vercel.app",
-    siteName: "GuestPilot AI",
-    images: [
-      {
-        url: "https://guests-pilot.vercel.app/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "GuestPilot AI",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "GuestPilot AI: Outreach Tool",
-    description: "Automate guest post outreach and manage your link building pipeline.",
-    images: ["https://guests-pilot.vercel.app/og-image.png"],
-  },
-};
-
-export default function RootLayout({
+export default async function DashboardLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
+  const dbUser = await db.query.users.findFirst({
+    where: eq(users.id, session.user.id),
+  });
+  const credits = dbUser?.credits ?? 0;
+
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-ink text-text">{children}</body>
-    </html>
+    <DashboardShell
+      workspaceName={session.workspace?.name ?? "Your workspace"}
+      credits={credits}
+      userEmail={session.user.email ?? ""}
+      userName={session.user.name ?? "Account"}
+    >
+      {children}
+    </DashboardShell>
   );
 }
