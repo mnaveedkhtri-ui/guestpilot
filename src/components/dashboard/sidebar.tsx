@@ -12,6 +12,7 @@ import {
   Store,
   ListChecks,
   ShieldCheck,
+  Building2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
   { href: "/finder", label: "Find Prospects", icon: Search },
   { href: "/prospects", label: "Prospects", icon: Globe2 },
   { href: "/campaigns", label: "Campaigns", icon: Megaphone },
+  { href: "/directory", label: "Directory", icon: Building2 },
   { href: "/list-site", label: "List Your Site", icon: Store },
   { href: "/my-sites", label: "My Sites", icon: ListChecks },
   { href: "/settings", label: "Settings", icon: Settings },
