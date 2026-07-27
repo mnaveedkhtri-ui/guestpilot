@@ -1,13 +1,15 @@
-import { LogOut } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import { signOutAction } from "@/actions/sign-out";
 import { Button } from "@/components/ui/button";
 
 export function Topbar({
   userName,
   userEmail,
+  onMenuClick,
 }: {
   userName: string;
   userEmail: string;
+  onMenuClick: () => void;
 }) {
   const initials = userName
     .split(" ")
@@ -17,9 +19,20 @@ export function Topbar({
     .toUpperCase();
 
   return (
-    <header className="h-16 flex items-center justify-between border-b border-border bg-surface px-6">
-      <div />
-      <div className="flex items-center gap-4">
+    <header className="h-16 flex items-center justify-between border-b border-border bg-surface px-4 md:px-6">
+      {/* Mobile Menu Button (Sirf mobile par dikhega) */}
+      <button 
+        onClick={onMenuClick} 
+        className="md:hidden text-text-muted hover:text-text transition-colors"
+        aria-label="Open menu"
+      >
+        <Menu size={24} />
+      </button>
+      
+      {/* Desktop spacer */}
+      <div className="hidden md:block" />
+      
+      <div className="flex items-center gap-2 sm:gap-4">
         <div className="text-right hidden sm:block">
           <p className="text-sm font-medium text-text leading-tight">{userName}</p>
           <p className="text-xs text-text-muted leading-tight">{userEmail}</p>
@@ -30,7 +43,7 @@ export function Topbar({
         <form action={signOutAction}>
           <Button type="submit" variant="ghost" size="sm">
             <LogOut size={16} />
-            Sign out
+            <span className="hidden sm:inline ml-2">Sign out</span>
           </Button>
         </form>
       </div>
