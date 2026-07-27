@@ -25,9 +25,10 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen bg-ink">
-      <Sidebar 
+       <Sidebar 
         workspaceName={session.workspace?.name ?? "Your workspace"} 
         credits={credits} 
+        userEmail={session.user.email} 
       />
       <div className="flex-1 flex flex-col min-w-0">
         <Topbar
