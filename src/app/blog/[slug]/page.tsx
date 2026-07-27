@@ -101,6 +101,42 @@ function markdownToHtml(markdown: string): string {
       return trimmed;
     }
 
+    // Table block: a line of | cells, a |---|---| separator line, then more | cell lines
+    const tableLines = trimmed.split("\n").filter((line) => line.trim().startsWith("|"));
+    if (
+      tableLines.length >= 2 &&
+      /^\|?[\s-:|]+\|?$/.test(tableLines[1].trim())
+    ) {
+      const parseRow = (line: string) =>
+        line
+          .trim()
+          .replace(/^\|/, "")
+          .replace(/\|$/, "")
+          .split("|")
+          .map((cell) => cell.trim());
+
+      const headerCells = parseRow(tableLines[0]);
+      const bodyRows = tableLines.slice(2).map(parseRow);
+
+      const theadHtml = `<thead><tr>${headerCells
+        .map(
+          (cell) =>
+            `<th class="text-left text-white font-semibold px-4 py-3 border-b border-gray-700 bg-gray-900/60">${cell}</th>`
+        )
+        .join("")}</tr></thead>`;
+
+      const tbodyHtml = `<tbody>${bodyRows
+        .map(
+          (row) =>
+            `<tr class="border-b border-gray-800">${row
+              .map((cell) => `<td class="px-4 py-3 text-gray-300">${cell}</td>`)
+              .join("")}</tr>`
+        )
+        .join("")}</tbody>`;
+
+      return `<div class="overflow-x-auto my-6"><table class="w-full border-collapse text-sm">${theadHtml}${tbodyHtml}</table></div>`;
+    }
+
     // Unordered list block, explicit classes since Tailwind preflight removes default bullets
     if (/^-\s/.test(trimmed)) {
       const items = trimmed
