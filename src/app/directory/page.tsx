@@ -4,7 +4,7 @@ import { publisherSites } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { LandingNav } from "@/components/landing/nav";
 import { Footer } from "@/components/landing/footer";
-import { Globe2, TrendingUp, DollarSign, Mail, Tag } from "lucide-react";
+import { Globe2, Mail, Tag } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Publisher Directory | Buy Guest Posts | Guest Pilot",
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default async function DirectoryPage() {
-  let sites = [];
+  // Type ko explicitly define kar diya hai taake TypeScript error na de
+  let sites: typeof publisherSites.$inferSelect[] = [];
+  
   try {
     sites = await db.select().from(publisherSites).where(eq(publisherSites.status, "approved"));
   } catch (e) {
