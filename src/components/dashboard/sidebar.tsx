@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
+  { href: "/list-site", label: "List Your Site", icon: Store }, 
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/finder", label: "Find Prospects", icon: Search },
   { href: "/prospects", label: "Prospects", icon: Globe2 },
