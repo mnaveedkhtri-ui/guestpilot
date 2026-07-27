@@ -224,6 +224,6 @@ Pricing varies widely by volume and features, from tools built for a single smal
 The best link building software is the one that matches your actual bottleneck, not the one with the longest feature list. If prospecting is the hard part, a strong backlink index earns its price. If the hard part is staying organized once outreach starts, a dedicated pipeline tool like GuestPilot will save more time than a bigger database ever will.
 
 Ready to keep your next campaign organized from the first pitch to the published link? [Create your GuestPilot workspace](/register) and start tracking outreach in under a minute.
-    \`,
+    `,
   },
 ];
