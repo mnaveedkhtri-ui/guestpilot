@@ -28,6 +28,9 @@ export function LandingNav() {
           <Link href="/blog" className="text-sm text-text-muted hover:text-text transition-colors">
             Blog
           </Link>
+          <Link href="/directory" className="text-sm text-text-muted hover:text-text transition-colors">
+            Directory
+         </Link>
           <Link href="/contact" className="text-sm text-text-muted hover:text-text transition-colors">
             Contact
           </Link>
