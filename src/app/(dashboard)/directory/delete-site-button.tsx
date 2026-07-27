@@ -15,7 +15,7 @@ export function DeleteSiteButton({ domain }: { domain: string }) {
     try {
       const res = await fetch(`/api/admin-sites/delete?domain=${domain}`);
       if (res.ok) {
-        router.refresh(); // Page refresh hoga aur website gayab ho jayegi
+        router.refresh();
       } else {
         alert("Failed to delete website.");
       }
@@ -30,10 +30,10 @@ export function DeleteSiteButton({ domain }: { domain: string }) {
     <button 
       onClick={handleDelete} 
       disabled={loading}
-      className="w-full mt-4 text-red-400 hover:text-red-300 border border-red-500/30 hover:bg-red-500/10 py-1.5 rounded-lg flex items-center justify-center gap-2 transition-colors text-xs font-medium disabled:opacity-50"
+      className="text-gray-600 hover:text-red-500 transition-colors p-1 rounded-full hover:bg-red-500/10"
+      title="Delete Site (Admin Only)"
     >
-      {loading ? <Loader2 className="h-3 w-3 animate-spin" /> : <Trash2 className="h-3 w-3" />}
-      {loading ? "Deleting..." : "Delete Site"}
+      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
     </button>
   );
 }
