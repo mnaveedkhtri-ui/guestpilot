@@ -210,3 +210,41 @@ export const publisherSitesRelations = relations(publisherSites, ({ one }) => ({
     references: [users.id],
   }),
 }));
+// ---------------------------------------------------------------------------
+// Orders (Marketplace Escrow)
+// ---------------------------------------------------------------------------
+
+export const orderStatuses = [
+  "pending_payment", // Buyer ne order kiya hai, payment pending hai
+  "in_progress",     // Payment ho gayi, seller kaam kar raha hai
+  "completed",       // Post live ho gaya
+  "cancelled"        // Order cancel ho gaya
+] as const;
+export type OrderStatus = (typeof orderStatuses)[number];
+
+export const orders = sqliteTable("orders", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  publisherSiteId: text("publisher_site_id")
+    .notNull()
+    .references(() => publisherSites.id, { onDelete: "cascade" }),
+  buyerEmail: text("buyer_email").notNull(),
+  buyerName: text("buyer_name").notNull(),
+  articleTopic: text("article_topic").notNull(),
+  specialInstructions: text("special_instructions"),
+  price: integer("price").notNull(), // Jo price directory par tha
+  status: text("status", { enum: orderStatuses })
+    .notNull()
+    .default("pending_payment"),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .notNull()
+    .default(sql`(unixepoch())`),
+});
+
+export const ordersRelations = relations(orders, ({ one }) => ({
+  publisherSite: one(publisherSites, {
+    fields: [orders.publisherSiteId],
+    references: [publisherSites.id],
+  }),
+}));
