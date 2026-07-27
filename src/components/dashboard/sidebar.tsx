@@ -11,6 +11,7 @@ import {
   Zap,
   Store,
   ListChecks,
+  ShieldCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,12 +21,11 @@ const NAV_ITEMS = [
   { href: "/prospects", label: "Prospects", icon: Globe2 },
   { href: "/campaigns", label: "Campaigns", icon: Megaphone },
   { href: "/list-site", label: "List Your Site", icon: Store },
-  { href: "/my-sites", label: "My Sites", icon: ListChecks },// Yahan rakha hai
+  { href: "/my-sites", label: "My Sites", icon: ListChecks },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
-// Yahan credits prop receive karenge
-export function Sidebar({ workspaceName, credits }: { workspaceName: string; credits: number }) {
+export function Sidebar({ workspaceName, credits, userEmail }: { workspaceName: string; credits: number; userEmail?: string | null }) {
   const pathname = usePathname();
 
   return (
@@ -59,9 +59,22 @@ export function Sidebar({ workspaceName, credits }: { workspaceName: string; cre
             </Link>
           );
         })}
+
+        {/* Admin Link Sirf aapko dikhega */}
+        {userEmail === "naveedkhtri7@gmail.com" && (
+          <Link
+            href="/admin-approvals"
+            className={cn(
+              "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors text-accent hover:bg-surface-2",
+              pathname === "/admin-approvals" && "bg-accent/15"
+            )}
+          >
+            <ShieldCheck size={18} />
+            Admin Approvals
+          </Link>
+        )}
       </nav>
 
-      {/* Credits aur Upgrade Box */}
       <div className="p-3 border-t border-border">
         <div className="bg-surface-2 rounded-lg p-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
