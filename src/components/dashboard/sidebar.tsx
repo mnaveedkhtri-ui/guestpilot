@@ -78,7 +78,7 @@ export function Sidebar({
               <Link
                 key={href}
                 href={href}
-                onClick={onMobileClose} // Mobile par click karte hi menu band ho
+                onClick={onMobileClose}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   active
@@ -97,4 +97,33 @@ export function Sidebar({
               href="/admin-approvals"
               onClick={onMobileClose}
               className={cn(
-                "flex items
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors text-accent hover:bg-surface-2",
+                pathname === "/admin-approvals" && "bg-accent/15"
+              )}
+            >
+              <ShieldCheck size={18} />
+              Admin Approvals
+            </Link>
+          )}
+        </nav>
+
+        <div className="p-3 border-t border-border">
+          <div className="bg-surface-2 rounded-lg p-4 text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Zap size={16} className="text-accent" />
+              <span className="text-sm font-semibold text-text">Credits</span>
+            </div>
+            <p className="text-2xl font-bold text-text mb-3">{credits}</p>
+            <Link 
+              href="/upgrade" 
+              onClick={onMobileClose}
+              className="block w-full bg-primary hover:bg-primary-hover text-white text-sm font-medium py-2 rounded-md transition-colors"
+            >
+              Upgrade to Pro
+            </Link>
+          </div>
+        </div>
+      </aside>
+    </>
+  );
+}
