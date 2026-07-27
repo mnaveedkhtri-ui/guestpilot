@@ -23,6 +23,7 @@ export function ListSiteForm() {
       traffic: Number(formData.get("traffic")),
       price: Number(formData.get("price")),
       linkType: formData.get("linkType"),
+      contactEmail: formData.get("contactEmail"), // Naya field
     };
 
     try {
@@ -46,42 +47,53 @@ export function ListSiteForm() {
   };
 
   return (
-    <Card>
+    <Card className="bg-surface/50 border-border">
       <CardHeader>
-        <CardTitle>Website Details</CardTitle>
-        <CardDescription>Provide accurate metrics to attract buyers.</CardDescription>
+        <CardTitle className="text-text">Website Details</CardTitle>
+        <CardDescription className="text-text-muted">Provide accurate metrics to attract buyers.</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
           <div className="md:col-span-2">
-            <Label htmlFor="domain">Domain (e.g., example.com)</Label>
-            <Input id="domain" name="domain" placeholder="yoursite.com" required />
+            <Label htmlFor="domain" className="text-text-muted">Domain (e.g., example.com)</Label>
+            <Input id="domain" name="domain" placeholder="yoursite.com" required className="bg-ink border-border text-text mt-1" />
           </div>
+          
           <div>
-            <Label htmlFor="niche">Niche (e.g., Technology, Health)</Label>
-            <Input id="niche" name="niche" placeholder="Technology" required />
+            <Label htmlFor="niche" className="text-text-muted">Niche (e.g., Technology)</Label>
+            <Input id="niche" name="niche" placeholder="Technology" required className="bg-ink border-border text-text mt-1" />
           </div>
+          
           <div>
-            <Label htmlFor="dr">Domain Rating (DR)</Label>
-            <Input id="dr" name="dr" type="number" placeholder="75" required />
+            <Label htmlFor="contactEmail" className="text-text-muted">Your Contact Email</Label>
+            <Input id="contactEmail" name="contactEmail" type="email" placeholder="you@email.com" required className="bg-ink border-border text-text mt-1" />
           </div>
+
           <div>
-            <Label htmlFor="traffic">Monthly Traffic</Label>
-            <Input id="traffic" name="traffic" type="number" placeholder="50000" required />
+            <Label htmlFor="dr" className="text-text-muted">Domain Rating (DR)</Label>
+            <Input id="dr" name="dr" type="number" placeholder="75" required className="bg-ink border-border text-text mt-1" />
           </div>
+          
           <div>
-            <Label htmlFor="price">Price (in $)</Label>
-            <Input id="price" name="price" type="number" placeholder="150" required />
+            <Label htmlFor="traffic" className="text-text-muted">Monthly Traffic</Label>
+            <Input id="traffic" name="traffic" type="number" placeholder="50000" required className="bg-ink border-border text-text mt-1" />
           </div>
-          <div className="md:col-span-2">
-            <Label htmlFor="linkType">Link Type</Label>
-            <select id="linkType" name="linkType" className="w-full h-9 rounded-md border border-gray-700 bg-gray-900 px-3 py-1 text-sm text-white">
+          
+          <div>
+            <Label htmlFor="price" className="text-text-muted">Price (in $)</Label>
+            <Input id="price" name="price" type="number" placeholder="150" required className="bg-ink border-border text-text mt-1" />
+          </div>
+          
+          <div>
+            <Label htmlFor="linkType" className="text-text-muted">Link Type</Label>
+            <select id="linkType" name="linkType" className="w-full h-9 rounded-md border border-border bg-ink px-3 py-1 text-sm text-text mt-1 focus:outline-none focus:ring-2 focus:ring-primary">
               <option value="Dofollow">Dofollow</option>
               <option value="Nofollow">Nofollow</option>
             </select>
           </div>
-          <div className="md:col-span-2">
-            <Button type="submit" disabled={loading} className="w-full">
+
+          <div className="md:col-span-2 mt-2">
+            <Button type="submit" disabled={loading} className="w-full" variant="accent">
               {loading ? "Submitting..." : "Submit Website"}
             </Button>
           </div>
