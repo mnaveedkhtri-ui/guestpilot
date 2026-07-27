@@ -19,7 +19,7 @@ export const users = sqliteTable(
       .$defaultFn(() => crypto.randomUUID()),
     name: text("name").notNull(),
     email: text("email").notNull(),
-    credits: integer("credits").default(10).notNull(), // <-- YE LINE ADD KI HAI
+    credits: integer("credits").default(10).notNull(),
     passwordHash: text("password_hash").notNull(),
     avatarUrl: text("avatar_url"),
     createdAt: integer("created_at", { mode: "timestamp" })
@@ -129,8 +129,6 @@ export const prospects = sqliteTable("prospects", {
     .notNull()
     .default("new"),
   notes: text("notes"),
-  // Real Domain Rating pulled from Ahrefs' free public endpoint. Null until
-  // fetched. See src/lib/ahrefs.ts for the fetch logic.
   domainRating: real("domain_rating"),
   domainRatingCheckedAt: integer("domain_rating_checked_at", {
     mode: "timestamp",
@@ -181,6 +179,7 @@ export const campaignsRelations = relations(campaigns, ({ one }) => ({
     references: [workspaces.id],
   }),
 }));
+
 // ---------------------------------------------------------------------------
 // Publisher Directory (Marketplace)
 // ---------------------------------------------------------------------------
@@ -196,9 +195,10 @@ export const publisherSites = sqliteTable("publisher_sites", {
   niche: text("niche").notNull(),
   dr: integer("dr").notNull(),
   traffic: integer("traffic").notNull(),
-  price: integer("price").notNull(), // Price in USD
+  price: integer("price").notNull(),
   linkType: text("link_type").notNull().default("Dofollow"),
-  status: text("status").notNull().default("pending"), // pending, approved, rejected
+  status: text("status").notNull().default("pending"),
+  contactEmail: text("contact_email"), // <-- YE LINE ADD KI HAI
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
