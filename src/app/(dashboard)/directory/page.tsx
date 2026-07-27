@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import { db } from "@/db";
 import { publisherSites } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { auth } from "@/lib/auth"; // Admin check ke liye
 import { Globe2, Mail, Tag } from "lucide-react";
+import { DeleteSiteButton } from "./delete-site-button"; // Naya button import kiya
 
 export const metadata: Metadata = {
   title: "Publisher Directory | Buy Guest Posts | Guest Pilot",
@@ -12,6 +14,10 @@ export const metadata: Metadata = {
 export default async function DirectoryPage() {
   let sites: typeof publisherSites.$inferSelect[] = [];
   
+  // Admin check
+  const session = await auth();
+  const isAdmin = session?.user?.email === "naveedkhtri7@gmail.com";
+
   try {
     sites = await db.select().from(publisherSites).where(eq(publisherSites.status, "approved"));
   } catch (e) {
@@ -35,7 +41,7 @@ export default async function DirectoryPage() {
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sites.map((site) => (
-            <div key={site.id} className="bg-surface/50 border border-border rounded-xl p-6 transition-all duration-500 hover:border-primary/50 hover:-translate-y-1">
+            <div key={site.id} className="bg-surface/50 border border-border rounded-xl p-6 transition-all duration-500 hover:border-primary/50 hover:-translate-y-1 flex flex-col">
               
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-2">
@@ -66,12 +72,20 @@ export default async function DirectoryPage() {
                 <span>Niche: {site.niche}</span>
               </div>
 
-              <a 
-                href={`mailto:${site.contactEmail}?subject=Guest Post Inquiry for ${site.domain}`}
-                className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-2 rounded-lg flex items-center justify-center gap-2 transition-colors"
-              >
-                <Mail size={16} /> Contact Publisher
-              </a>
+              <div className="mt-auto">
+                <a 
+                  href={`mailto:${site.contactEmail}?subject=Guest Post Inquiry for ${site.domain}`}
+                  className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-2 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                >
+                  <Mail size={16} /> Contact Publisher
+                </a>
+                
+                {/* Sirf Admin ko Delete ka button dikhega */}
+                {isAdmin && (
+                  <DeleteSiteButton domain={site.domain} />
+                )}
+              </div>
+
             </div>
           ))}
         </div>
