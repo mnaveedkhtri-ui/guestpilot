@@ -13,7 +13,7 @@ export default async function DashboardLayout({
   const session = await auth();
 
   if (!session?.user?.id) {
-    redirect("/login");
+    redirect("/login"); // Yahan direct login page par bhej dega
   }
 
   const dbUser = await db.query.users.findFirst({
