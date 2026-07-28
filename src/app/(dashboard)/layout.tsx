@@ -4,6 +4,8 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { DashboardShell } from "@/components/dashboard/dashboard-shell";
+import { LandingNav } from "@/components/landing/nav";
+import { Footer } from "@/components/landing/footer";
 
 export default async function DashboardLayout({
   children,
@@ -12,10 +14,18 @@ export default async function DashboardLayout({
 }) {
   const session = await auth();
 
+  // Agar user login nahi hai, toh sidebar ki jagah Landing Navbar dikhaye
   if (!session?.user?.id) {
-    redirect("/login");
+    return (
+      <div className="min-h-screen flex flex-col bg-ink text-text">
+        <LandingNav />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </div>
+    );
   }
 
+  // Agar user login hai, toh normal Sidebar wala dashboard dikhaye
   const dbUser = await db.query.users.findFirst({
     where: eq(users.id, session.user.id),
   });
