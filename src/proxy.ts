@@ -33,10 +33,15 @@ export const config = {
     "/prospects/:path*",
     "/campaigns/:path*",
     "/settings/:path*",
-    "/directory/:path*", // 2. Yahan /directory add kiya hai
+    "/directory", // <-- YEH LINE ADD KAREIN (Exact match ke liye)
+    "/directory/:path*", 
+    "/finder",
     "/finder/:path*",
+    "/list-site",
     "/list-site/:path*",
+    "/my-sites",
     "/my-sites/:path*",
+    "/admin-approvals",
     "/admin-approvals/:path*",
     "/login",
     "/register",
