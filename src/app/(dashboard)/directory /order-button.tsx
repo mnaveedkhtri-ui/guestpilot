@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { ShoppingCart, Loader2, Send } from "lucide-react";
 
@@ -14,7 +14,7 @@ export function OrderButton({ siteId, domain, price }: { siteId: string; domain:
   const [topic, setTopic] = useState("");
   const [instructions, setInstructions] = useState("");
 
-  useState(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
