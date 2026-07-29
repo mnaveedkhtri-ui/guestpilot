@@ -6,14 +6,14 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "GuestPilot AI: Outreach Tool",
-  description: "Automate guest post outreach and manage your link building pipeline.",
+  title: "GuestPilot: Guest Post Outreach & Link Building Software",
+  description: "Streamline link building with GuestPilot. Track guest post prospects, manage outreach campaigns, and organize your SEO pipeline in one workspace.",
   verification: {
     google: "wYFUIXoVNRkPCSeAExJZhbNGbE9pcbuFswY8d8GCIdw",
   },
   openGraph: {
-    title: "GuestPilot AI: Outreach Tool",
-    description: "Automate guest post outreach and manage your link building pipeline.",
+    title: "GuestPilot: Guest Post Outreach & Link Building Software",
+    description: "Streamline link building with GuestPilot. Track guest post prospects, manage outreach campaigns, and organize your SEO pipeline in one workspace.",
     url: "https://guests-pilot.vercel.app",
     siteName: "GuestPilot AI",
     images: [
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GuestPilot AI: Outreach Tool",
-    description: "Automate guest post outreach and manage your link building pipeline.",
+    title: "GuestPilot: Guest Post Outreach & Link Building Software",
+    description: "Streamline link building with GuestPilot. Track guest post prospects, manage outreach campaigns, and organize your SEO pipeline in one workspace.",
     images: ["https://guests-pilot.vercel.app/og-image.png"],
   },
 };
