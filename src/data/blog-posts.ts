@@ -231,8 +231,9 @@ Ready to keep your next campaign organized from the first pitch to the published
     title: "How to Run an Outreach Campaign for Guest Posts in 2026",
     excerpt:
       "Learn how to structure an outreach campaign for guest posting, from building a prospect list to tracking replies through to published links.",
-    date: "2026-08-02",
-    readTime: "8 min read",
+    date: "August 2, 2026",
+    author: "Naveed Khatri",
+    views: "1",
     category: "Link Building",
     keywords: [
       "outreach campaign",
