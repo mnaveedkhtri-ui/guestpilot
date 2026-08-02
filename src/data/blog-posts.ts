@@ -226,4 +226,121 @@ The best link building software is the one that matches your actual bottleneck, 
 Ready to keep your next campaign organized from the first pitch to the published link? [Create your GuestPilot workspace](/register) and start tracking outreach in under a minute.
     `,
   },
+  {
+    slug: "how-to-run-an-outreach-campaign",
+    title: "How to Run an Outreach Campaign for Guest Posts in 2026",
+    excerpt:
+      "Learn how to structure an outreach campaign for guest posting, from building a prospect list to tracking replies through to published links.",
+    date: "2026-08-02",
+    readTime: "8 min read",
+    category: "Link Building",
+    keywords: [
+      "outreach campaign",
+      "guest post outreach campaign",
+      "link building campaign",
+      "how to run an outreach campaign",
+      "email outreach campaign seo",
+      "guest posting strategy",
+      "outreach campaign tracker",
+      "cold outreach for backlinks",
+    ],
+    image: "/blog-images/outreach-campaign-hero.jpg",
+    imageAlt: "Person reviewing an outreach campaign dashboard showing prospects grouped by status",
+    content: `
+## Why Most Outreach Campaigns Fall Apart
+
+An outreach campaign sounds simple on paper: find sites, send emails, get links. In practice, most campaigns fall apart somewhere in the middle. A prospect list starts in a spreadsheet, gets updated inconsistently, and within a few weeks nobody can say for sure who's already been contacted, who replied, or which pitch actually worked. The problem usually isn't the outreach itself, it's the lack of a system holding the campaign together.
+
+This guide walks through how to structure a guest post outreach campaign properly, from the first prospect you add to the moment a link goes live, using the same pipeline you can set up in [GuestPilot AI](https://guests-pilot.vercel.app/register).
+
+## What an Outreach Campaign Actually Is
+
+A campaign is simply a grouped set of prospects working toward one specific goal. That goal might be a client's monthly link building retainer, a one-time push around a product launch, or an ongoing effort to build authority in a particular niche. The reason to separate campaigns instead of dumping every prospect into one giant list is that each one usually has a different pitch angle, a different timeline, and a different way of measuring success.
+
+Mixing campaigns together is one of the fastest ways to lose track of outreach. A prospect meant for a Q3 client push gets contacted with the wrong pitch, or a site already rejected for one client gets pitched again for another without anyone noticing the overlap.
+
+![Campaign board showing prospects grouped into separate outreach pushes](/blog-images/outreach-campaign-1.jpg)
+
+## Step 1: Build a Focused Prospect List
+
+Before sending a single email, the campaign needs a clear list of target sites. A focused list beats a large, unfiltered one almost every time.
+
+- **Relevance first.** A site loosely related to your niche is worth far less than one directly relevant to the topic you're pitching.
+- **Real contact info.** A guest post pitch sent to a generic contact form rarely gets read. Find an actual editor or contributor email where possible.
+- **Notes as you go.** Add context on why a site is a good fit, what angle you plan to pitch, or anything specific about their existing content. This matters later when you're managing dozens of prospects at once and can't remember the reasoning behind each one.
+
+Inside a [workspace](https://guests-pilot.vercel.app/register), each prospect gets its own entry with a domain, contact, and notes field, so this research doesn't live in a separate document that drifts out of sync with the actual outreach.
+
+## Step 2: Set Up a Status Pipeline
+
+The single biggest reason outreach campaigns lose track of themselves is the lack of a consistent status system. Without one, "did we hear back from them" becomes a question nobody can answer quickly.
+
+A simple, effective pipeline looks like this:
+
+1. **New** — added to the campaign, not yet contacted
+2. **Contacted** — initial pitch sent
+3. **In discussion** — they've replied and a conversation is underway
+4. **Accepted** — they've agreed to the guest post
+5. **Rejected** — declined, no further action needed
+6. **Published** — the post is live
+
+Every prospect should sit in exactly one of these stages at any given time. Moving a prospect forward as the conversation progresses, rather than trying to remember it later, is what keeps a campaign from turning into guesswork by week three.
+
+![Status pipeline showing prospects moving from new to published](/blog-images/outreach-campaign-2.jpg)
+
+## Step 3: Write a Pitch Worth Reading
+
+Most cold outreach emails get ignored, and the reason is usually that they're generic enough to have been sent to a hundred other sites unchanged. A pitch that actually gets a reply tends to do three things:
+
+- References something specific about the site, not just the niche in general
+- States clearly and briefly what topic you'd write about and why it fits their existing content
+- Keeps the ask small in the first message, since a long pitch asking for a full commitment upfront is easier to ignore than a short one asking for a quick yes or no
+
+Keep a simple template as a starting point, but customize the first line or two for each prospect. This is usually the difference between a pitch that gets opened and one that doesn't.
+
+## Step 4: Follow Up Without Being Annoying
+
+Most replies don't come from the first email. A single, well-timed follow-up a week or so later, briefly restating the pitch, often gets a response the first email didn't. Beyond that, a second follow-up rarely helps and can start working against you.
+
+Moving a prospect to **in discussion** as soon as they reply, rather than leaving it sitting at **contacted**, keeps the pipeline accurate and makes it obvious at a glance which prospects still need a follow-up versus which ones are already in an active conversation.
+
+## Step 5: Track the Campaign Through to Published
+
+A guest post accepted isn't the same as a guest post live. Between acceptance and publication there's often a draft to write, edits to make, and a publish date that can slip. Keeping the prospect at **accepted** until the link is actually confirmed live, then moving it to **published**, gives you an accurate picture of how many links a campaign has actually produced, not just how many pitches got a yes.
+
+This final step matters most when reporting results to a client or comparing one campaign's performance against another. A pipeline that stops tracking at "accepted" tends to overstate how much a campaign actually delivered.
+
+## Running Multiple Campaigns at Once
+
+Agencies and freelancers running outreach for more than one client need campaigns kept fully separate. A [workspace built around campaigns](https://guests-pilot.vercel.app/) rather than one flat prospect list means a client's Q3 push and another client's ongoing monthly outreach never get tangled together, and a prospect already pitched for one client doesn't accidentally get pitched again under a different campaign without anyone noticing.
+
+## A Simple Weekly Routine
+
+- **Monday:** Add new prospects researched over the previous week to the right campaign
+- **Tuesday to Thursday:** Send initial pitches and follow-ups for prospects sitting at contacted for more than a week
+- **Friday:** Update statuses for any replies received, move accepted posts toward publication, and check the [directory](https://guests-pilot.vercel.app/directory) for new prospect ideas
+
+Repeating this weekly, rather than running outreach in occasional bursts, is usually what separates campaigns that steadily produce links from ones that stall out after the first round of emails.
+
+## Frequently Asked Questions
+
+**How many prospects should a single outreach campaign include?**
+There's no fixed number, but a focused list of 20 to 40 highly relevant sites usually outperforms a much larger list of loosely related ones, since relevance affects reply rate more than volume does.
+
+**How long should I wait before following up?**
+About a week is a reasonable default. Following up too quickly can come across as pushy, while waiting too long often means the original email has already been forgotten.
+
+**Should rejected prospects ever be revisited?**
+Sometimes, especially months later with a different pitch angle or a new piece of content to offer. Keeping the rejected status rather than deleting the prospect preserves that option.
+
+**What's the biggest mistake in outreach campaign tracking?**
+Letting status updates lag behind reality. A prospect that replied three days ago but still shows as contacted makes the whole pipeline unreliable, since nobody can trust it enough to act on it quickly.
+
+## Final Thoughts
+
+An outreach campaign succeeds or fails less on the quality of any single email and more on whether the whole process stays organized from first contact through to a published link. A focused prospect list, a consistent status pipeline, and a routine for following up and tracking results turns outreach from a scattered spreadsheet habit into something that reliably produces links over time.
+
+Ready to organize your next campaign properly? [Create your workspace](https://guests-pilot.vercel.app/register) and add your first prospect in under a minute.
+    `,
+  },
 ];
