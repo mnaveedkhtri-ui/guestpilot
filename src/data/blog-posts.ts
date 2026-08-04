@@ -445,6 +445,6 @@ Sending a follow-up to someone who already replied, or realizing a site was pitc
 Prospect tracking isn't about adding process for its own sake. It's about making sure a good pitch doesn't quietly die because a follow-up got missed or a reply sat unread. Once outreach passes a small handful of sites, a structured pipeline stops being optional and starts being the thing that actually determines how many of your pitches turn into published links.
 
 Ready to organize your own pipeline? [Create your free GuestPilot workspace](/register) and start tracking prospects properly today.
-    \`,
+    `,
   },
 ];
