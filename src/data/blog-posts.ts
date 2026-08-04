@@ -344,4 +344,107 @@ An outreach campaign succeeds or fails less on the quality of any single email a
 Ready to organize your next campaign properly? [Create your workspace](https://guests-pilot.vercel.app/register) and add your first prospect in under a minute.
     `,
   },
+  {
+    slug: "prospect-tracking-guest-post-outreach",
+    title: "Prospect Tracking for Guest Post Outreach: A Guide",
+    excerpt:
+      "Why spreadsheets break down for guest post outreach, and how proper prospect tracking keeps every pitch and reply organized.",
+    date: "2026-07-27",
+    author: "Naveed Khatri",
+    views: "0",
+    category: "LINK BUILDING",
+    keywords: [
+      "prospect tracking",
+      "outreach prospect tracking",
+      "guest post prospect list",
+      "link building pipeline",
+      "outreach crm tracking",
+      "guest posting spreadsheet alternative",
+      "track outreach prospects",
+      "guest post pipeline stages",
+    ],
+    image: "/blog-images/prospect-tracking-hero.jpg",
+    imageAlt: "Prospect tracking kanban board showing guest post outreach stages from lead intake to closed",
+    content: `
+## Why Prospect Tracking Matters More Than It Seems
+
+Most guest post outreach starts in a spreadsheet, and for the first ten or fifteen sites, that works fine. The problem shows up once volume grows: a row gets missed, a follow-up date passes unnoticed, someone replies and the message sits unread for a week, or two people on a team end up pitching the same site without realizing it. None of these are dramatic failures on their own, but together they quietly cost real opportunities.
+
+Prospect tracking is really just the discipline of knowing, at any moment, exactly where every site stands in your pipeline. If you haven't set this up yet, [creating a free GuestPilot workspace](/register) gives you a structured pipeline instead of another spreadsheet to maintain.
+
+## What Good Prospect Tracking Actually Looks Like
+
+A useful tracking system answers a few questions instantly, without digging through old emails:
+
+- Which sites have I already contacted, and when
+- Who replied, and what did they say
+- Which pitches are waiting on a follow-up, and how overdue is it
+- Which sites accepted, and where is that draft in progress
+- Which sites said no, and should they be revisited later
+
+A spreadsheet can technically hold all of this, but it depends entirely on someone remembering to update every cell after every interaction, which tends to fall apart once outreach volume passes what one person can hold in their head.
+
+## The Core Pipeline Stages
+
+Most guest post outreach naturally breaks into a handful of stages, and tracking prospects by stage rather than by a flat list makes the whole pipeline easier to scan at a glance:
+
+1. **New**, meaning a site has been identified as a good fit but hasn't been contacted yet
+2. **Contacted**, meaning a pitch has gone out and you're waiting on a response
+3. **In Discussion**, meaning there's been a reply and details are being worked out
+4. **Accepted**, meaning the site agreed and a draft is in progress
+5. **Published**, meaning the post is live and the link is confirmed
+
+Seeing prospects grouped this way, rather than as one long list, makes it obvious at a glance where the pipeline is thin and where follow-ups are overdue.
+
+## What to Track for Each Prospect
+
+Beyond just the stage, a few details make the difference between a tracker that's actually useful and one that just holds names:
+
+- **Contact name and email**, not just the site's general domain
+- **Date of first contact**, so you know exactly when a follow-up is due
+- **Notes from any reply**, since context gets lost fast if it's only in your inbox
+- **Domain quality indicators**, so you're not re-evaluating the same site from scratch every time it comes up again
+- **Outcome**, whether that's published, declined, or gone quiet, so history isn't lost when a prospect moves on
+
+## Why Spreadsheets Break Down at Scale
+
+Spreadsheets aren't a bad starting point, but they have specific weaknesses that show up predictably as a pipeline grows:
+
+- No reminders, so follow-ups depend entirely on someone remembering to check
+- **No shared visibility** if more than one person is doing outreach, which leads to duplicate pitches
+- **No history tied to a contact**, so context from a previous conversation gets lost between rows
+- **Manual sorting and filtering**, which gets slower and more error-prone as the list grows past a hundred or so rows
+
+This isn't unique to outreach either. [HubSpot's own research on pipeline management](https://blog.hubspot.com/sales/sales-pipeline-stages) makes the same point about sales pipelines generally: once a process has more than a handful of moving parts, structured stages consistently outperform an unstructured list. A dedicated tracker built specifically for guest post outreach, like [GuestPilot's pipeline view](/register), applies that same principle without needing extra spreadsheet formulas layered on top.
+
+## A Simple Weekly Tracking Routine
+
+- Review every prospect sitting in "Contacted" for more than five to seven business days and send a follow-up
+- Move any prospect with a new reply into "In Discussion" the same day it comes in
+- Check "Accepted" prospects against agreed deadlines to avoid drafts slipping past the date you promised
+- Revisit "Declined" prospects after a few months, since a no today doesn't mean no forever
+
+This routine only works consistently if the underlying tracking makes it fast to see where things stand, which is exactly the gap our [guest post outreach playbook](/blog/guest-post-outreach-playbook) covers from the pitching side. If you're still deciding between building this yourself in a spreadsheet or using a dedicated tool, our [comparison of outreach tools](/blog/guestpilot-alternatives) breaks down the tradeoffs in more detail.
+
+## Frequently Asked Questions
+
+**How many prospects should I be tracking at once?**
+There's no fixed number, but most people find that once a pipeline passes twenty or thirty active prospects, a spreadsheet starts feeling noticeably harder to manage than a dedicated tracker.
+
+**Should declined prospects be deleted from tracking?**
+No, keep them. A site that says no in one context might be a good fit for a different topic later, and having that history saves you from repeating a pitch that already failed.
+
+**Is prospect tracking only useful for teams?**
+No, solo outreach benefits just as much, mainly because it's easy to lose track of follow-up timing even when you're the only person involved. This mirrors what [Zapier's comparison of spreadsheets versus dedicated tools](https://zapier.com/blog/spreadsheet-vs-database/) found more broadly: individuals hit the same organizational limits as teams, just at a slightly larger scale before it becomes obvious.
+
+**What's the biggest sign that tracking has broken down?**
+Sending a follow-up to someone who already replied, or realizing a site was pitched twice. Both usually mean the tracking system stopped being trustworthy at some point.
+
+## Final Thoughts
+
+Prospect tracking isn't about adding process for its own sake. It's about making sure a good pitch doesn't quietly die because a follow-up got missed or a reply sat unread. Once outreach passes a small handful of sites, a structured pipeline stops being optional and starts being the thing that actually determines how many of your pitches turn into published links.
+
+Ready to organize your own pipeline? [Create your free GuestPilot workspace](/register) and start tracking prospects properly today.
+    \`,
+  },
 ];
