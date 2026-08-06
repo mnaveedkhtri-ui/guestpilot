@@ -333,14 +333,15 @@ The best link building software is the one that matches your actual bottleneck, 
 Ready to keep your next campaign organized from the first pitch to the published link? [Create your GuestPilot workspace](/register) and start tracking outreach in under a minute.
     `,
   },
-  {
+ {
     slug: "optimize-bing-webmaster-tools-seo-moz",
     title: "How to Optimize Bing Webmaster Tools SEO with Moz in 2026",
     excerpt:
       "Learn how to optimize Bing Webmaster Tools SEO using Moz data, from sitemap setup to backlink tracking, to capture traffic Google alone misses.",
     date: "2026-07-27",
-    readTime: "10 min read",
-    category: "SEO Tools",
+    author: "Naveed Khatri",
+    views: "0",
+    category: "SEO",
     keywords: [
       "optimize bing webmaster tools seo moz",
       "bing webmaster tools seo",
