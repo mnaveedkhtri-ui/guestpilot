@@ -352,8 +352,8 @@ Ready to keep your next campaign organized from the first pitch to the published
       "moz domain authority",
       "bing indexing",
     ],
-    image: "/blog-images/bing-webmaster-moz-hero.jpg",
-    imageAlt: "Laptop screen showing a Bing Webmaster Tools dashboard with site performance graphs and crawl stats",
+    image: "/blog-images/google-seo-content-on-page-optimization.jpg",
+    imageAlt: "SEO analytics dashboard on a widescreen monitor showing organic traffic growth, keyword rankings, and technical SEO score",
     content: `
 ## Why Bing Webmaster Tools Still Deserves Your Attention
 
@@ -361,7 +361,7 @@ Most SEO strategies revolve entirely around Google, which means **Bing Webmaster
 
 Pairing Bing Webmaster Tools with **Moz's** SEO metrics gives you a fuller picture: Bing tells you how your site is actually crawled and indexed, while Moz tells you how your domain compares on authority and backlinks. Used together, they help you optimize for a search engine that gets less attention but converts just as well. This guide walks through the setup, the metrics that matter, and how to fold Bing into a workflow you're likely already running through our [free SEO audit tool](/audit).
 
-![Close-up of a computer monitor showing a search performance dashboard with keyword ranking charts trending upward](/blog-images/bing-webmaster-moz-1.jpg)
+![Website performance dashboard showing Core Web Vitals, backlink data, and keyword rankings](/blog-images/how-to-improve-website-ranking-google-seo.jpg)
 
 ## Setting Up Bing Webmaster Tools Correctly
 
@@ -385,8 +385,6 @@ Bing's crawler behaves differently than Googlebot, and it's often less forgiving
 
 If you're working through broken pages or crawl errors here, the same principles from our guide on [finding and fixing broken links](/blog/how-to-find-and-fix-broken-links) apply directly, since a 404 is a 404 regardless of which search engine hits it.
 
-![Hands typing on a laptop keyboard with a subtle sitemap diagram reflected on the screen](/blog-images/bing-webmaster-moz-2.jpg)
-
 ## Using Moz Alongside Bing Webmaster Tools
 
 Bing Webmaster Tools shows you how Bing sees your site, but it doesn't give you competitive context. That's where **Moz** fills the gap.
@@ -408,7 +406,7 @@ Backlink data is where combining these two tools pays off the most directly.
 
 This connects closely with the white hat backlink approaches covered in our guide on [increasing your site's SEO](/blog/how-to-increase-seo-of-your-website), since the same outreach and content strategies that earn Google backlinks tend to earn Bing visibility too.
 
-![Wide shot of a modern office desk with two monitors showing data visualization and network node diagrams](/blog-images/bing-webmaster-moz-3.jpg)
+![Diagram showing content optimization and on-page SEO elements including keyword research, internal linking, and schema markup](/blog-images/technical-seo-backlinks-website-ranking.jpg)
 
 ## Keyword and Content Optimization for Bing
 
